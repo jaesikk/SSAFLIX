@@ -1,18 +1,47 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div class="contain">
+  <div class="home slider">
+    <span onmouseover="scrollEsquerda()" onmouseout="clearScroll()" class="handle handlePrev active">
+      <i class="fa fa-caret-left" aria-hidden="true"></i>
+    </span>
+
+      <div id="scroller" class="row">
+        <div class="row__inner">
+    
+         <MovieCard v-for="movie in movies" :key="movie.pk" :movie='movie'/>
+
+       </div>
+      </div>
+
+    <span onmouseover="scrollDireita()" onmouseout="clearScroll()"  class="handle handleNext active">
+      <i class="fa fa-caret-right" aria-hidden="true"></i>
+    </span>
+
   </div>
+</div>
+    
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+// import axios from 'axios'
+import MovieCard from '@/components/MovieCard.vue'
+import { mapState } from 'vuex'
+
 
 export default {
   name: 'Home',
   components: {
-    HelloWorld
+    MovieCard
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      this.$store.dispatch('getMovies')
+      console.log('getMovies')
+    })
+  },
+  computed: {
+    ...mapState(['movies'])
   }
 }
 </script>
