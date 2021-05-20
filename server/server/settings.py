@@ -137,4 +137,6 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# 커스텀 유저 모델시 다른 곳에서 모델 참조할 때 사용할 위치 값
 AUTH_USER_MODEL = 'accounts.User'

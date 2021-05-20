@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # accounts, community, movies로 각각 url 연결
     path('accounts/', include('accounts.urls')),
     path('community/', include('community.urls')),
     path('movies/', include('movies.urls')),

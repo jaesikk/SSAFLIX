@@ -4,7 +4,11 @@
 
 ## 210520
 
-- 오전 - 데이터 모델링, 기본적인 환경 변수 세팅, 데이터를 가져올 api 선택 중
+
+
+### 오전 
+
+- 데이터 모델링, 기본적인 환경 변수 세팅, 데이터를 가져올 api 선택 중
 
 
 
@@ -54,6 +58,22 @@ $ pip freeze > requirements.txt
 ```
 
 - settings.py에 기본 세팅
+
+
+
+### 오후
+
+- ERD를 기반으로한 모델 구성 (User, Movie, community, comment)
+- User - custom user model + serializer, 세팅에 등록, admin 등록
+- Movie - model 생성 + serializer 등록, admin 등록, movies페이지로 잘 보여주나 확인
+- loaddata를 위한 get_movies.py 완성 - 도중에 한글이 유니코드로 나오는 이슈 발생 - 해결 (ensure_ascii=False)
+
+```python
+# formatting한 데이터를 json 파일로 저장
+with open('movies.json', 'w', encoding='utf-8') as f:
+    f.write(json.dumps(movie_list, ensure_ascii=False))
+    # json.dump(movie_list, f, ensure_ascii=False)
+```
 
 
 

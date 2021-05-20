@@ -3,5 +3,6 @@ from . import views
 app_name = 'movies'
 
 urlpatterns = [
+    # ~/movies/
     path('', views.movies, name="movies")
 ]
