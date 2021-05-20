@@ -1,8 +1,16 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+       <!-- nav bar -->
+      <nav class="navbar navbar-expand-lg navbar-dark border rounded-pill border-light">
+        <div class="container">
+          <router-link to="/" class="navbar-brand">Home</router-link> |
+          <router-link :to="{ name: 'Recommend' }" class="nav-item">Recommend</router-link> |
+          <router-link :to="{ name: 'Community' }">Community</router-link> |
+          <router-link :to="{ name: 'Login' }">Login</router-link> |
+          <router-link :to="{ name: 'Signup' }">Signup</router-link> |
+        </div>
+      </nav>
     </div>
     <router-view/>
   </div>
@@ -10,7 +18,8 @@
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
