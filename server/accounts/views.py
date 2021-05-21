@@ -37,11 +37,11 @@ def signup(request):
     return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def id_check(request):
     # id 데이터를 request에서 꺼내기
     request_username = request.data.get('username')
     if User.objects.filter(username=request_username):
         return Response({'error': '중복된 ID입니다. 다른 ID를 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
-    else:
+    else:   
         return Response({'accept': '중복되지 않은 ID 입니다. 사용 가능합니다.'}, status=status.HTTP_200_OK)
