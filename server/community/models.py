@@ -16,5 +16,6 @@ class Review(models.Model):
 # 영화 리뷰 게시글의 댓글 모델
 class ReviewComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
     comment = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
