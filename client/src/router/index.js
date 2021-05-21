@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
 import Community from '../views/community/Community.vue'
+import CreateReview from '../views/community/CreateReview.vue'
 import Recommend from '../views/movies/Recommend.vue'
 
 Vue.use(VueRouter)
@@ -34,7 +35,11 @@ const routes = [
     name: 'Recommend',
     component: Recommend
   },
-
+  {
+    path: '/community/CreateReview',
+    name: 'CreateReview',
+    component: CreateReview
+  }
 ]
 
 const router = new VueRouter({
