@@ -1,9 +1,9 @@
 from django.db import models
 
-# Create your models here.
-
-# class Genre(models.Model):
-#     name = models.CharField(max_length=50)
+# 장르 코드와 이름을 가진 장르 테이블
+class Genre(models.Model):
+    name = models.CharField(max_length=50)
+    genre_code = models.IntegerField()
 
 # Movie 모델 생성
 class Movie(models.Model):

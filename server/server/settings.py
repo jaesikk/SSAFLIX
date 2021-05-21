@@ -31,16 +31,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # local
+    # local 앱
     'movies',
     'accounts',
     'community',
 
-    # 3rd party
+    # 3rd party 라이브러리
     'corsheaders',
     'rest_framework',
 
-    # django_base
+    # django 기본
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,6 +61,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# CORS에서 허용하도록 하는 웹 페이지 리스트
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8080",
 ]
@@ -144,3 +145,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # 커스텀 유저 모델시 다른 곳에서 모델 참조할 때 사용할 위치 값
 AUTH_USER_MODEL = 'accounts.User'
+
+# JWT 전역 사용 시
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated',
+#     ),
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+#         'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.BasicAuthentication',
+#     ),
+# }
