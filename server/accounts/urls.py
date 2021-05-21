@@ -11,5 +11,8 @@ urlpatterns = [
     path('api-token-auth/', obtain_jwt_token),
     # 해당 토큰이 유효한지 체크하는 url
     path('api-token-verify/', verify_jwt_token),
+    # 회원 가입 url
     path('signup/', views.signup),
+    # id 중복 체크 url
+    path('id-check/', views.id_check),
 ]
