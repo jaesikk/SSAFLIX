@@ -5,6 +5,7 @@ import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
 import Community from '../views/community/Community.vue'
 import CreateReview from '../views/community/CreateReview.vue'
+import ReviewDetail from '../views/community/ReviewDetail.vue'
 import Recommend from '../views/movies/Recommend.vue'
 
 Vue.use(VueRouter)
@@ -39,7 +40,16 @@ const routes = [
     path: '/community/CreateReview',
     name: 'CreateReview',
     component: CreateReview
-  }
+  },
+  {
+    path: '/community/:reviewTitle/ReviewDetail',
+    name: 'ReviewDetail',
+    component: ReviewDetail,
+    props: route => ({
+      reviewTitle: String(route.params.reviewTitle),
+      reviewContent: String(route.params.reviewContent),
+    }),
+  },
 ]
 
 const router = new VueRouter({

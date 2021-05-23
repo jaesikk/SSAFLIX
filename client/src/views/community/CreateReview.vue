@@ -1,8 +1,22 @@
 <template>
   <div>
   <h1> Create </h1>
-    <input type="text" v-model.trim="review.title"> | 
-    <button @click="createReview">생성</button>
+    <div class="text-muted">
+
+      <div>
+        <input type="text" v-model.trim="review.title"> | 
+      </div>
+      <div>
+        <input type="text" v-model.trim="review.movie_title"> | 
+      </div>
+      <div>
+        <input type="text" v-model.trim="review.content"> | 
+      </div>
+      <div>
+        <input type="number" v-model.trim="review.rank"> | 
+      </div>
+      <button @click="createReview">생성</button>
+    </div>
   </div>
 </template>
 
@@ -12,15 +26,21 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'CreateReview',
+  props: {
+    isLogin: {
+      type: Boolean,
+      required: true,
+    }
+  },
   data: function () {
     return {
       review: {
-        title: 'zz',    
-        movie_title: 'dd',
-        content: 'aa',
-        // created_at: '',
-        // updated_at: '',
-        rank: '4',
+        title: '글 제목',    
+        movie_title: '영화 제목',
+        content: '글 내용',
+        created_at: '',
+        updated_at: '',
+        rank: '',
       }
     }
   },
@@ -46,6 +66,11 @@ export default {
           console.log(err.response)
         })
       }
+    }
+  },
+  created: function () {
+    if (!this.isLogin) {
+      this.$router.push({ name: 'Login' })
     }
   }
 }

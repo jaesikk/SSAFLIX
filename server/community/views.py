@@ -17,7 +17,7 @@ from .sertializer import ReviewCommentSerializer, ReviewSerializer
 @permission_classes([IsAuthenticated])
 def review_list_create(request):
     if request.method == 'GET':
-        review_list = request.user.reviews
+        review_list = Review.objects.all()
         serializer = ReviewSerializer(review_list, many=True)
         return Response(serializer.data)
     else: # POST
@@ -47,8 +47,11 @@ def review_update_delete(request, review_pk):
             serializer.save()
             return Response(serializer.data)
     else: # DELETE
-        review.delete()
-        return Response({ 'id': review_pk })
+        if request.user == review.user:
+            review.delete()
+            return Response({ 'id': review_pk })
+        else:
+            return Response({'error': '작성자와 같은 유저가 아닙니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET', 'POST'])

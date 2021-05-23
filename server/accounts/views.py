@@ -46,3 +46,10 @@ def id_check(request):
         return Response({'error': '중복된 ID입니다. 다른 ID를 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
     else:   
         return Response({'accept': '중복되지 않은 ID 입니다. 사용 가능합니다.'}, status=status.HTTP_200_OK)
+
+def jwt_response_payload_handler(token, user=None, request=None):
+    return {
+        'token': token,
+        'user': UserSerializer(user, context={'request': request}).data,
+        'userId': user.pk,
+    }
