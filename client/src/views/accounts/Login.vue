@@ -56,6 +56,7 @@ export default {
         data: this.credentials,
       }).then((res) => {
         localStorage.setItem('jwt', res.data.token)
+        console.log(res.data)
         this.$emit('login')
         this.$router.push({ name: 'Home' }) 
         // App에게 login 전달

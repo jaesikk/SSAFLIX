@@ -7,15 +7,20 @@
         {{ review.title }}
       </li>
     </ul>
+    <CommunityDetail v-for="review in reviews" :key="review.pk" :review="review" />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import CommunityDetail from '@/components/CommunityDetail.vue'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'Community',
+  component: {
+    CommunityDetail,
+  },
   data: function () {
     return {
       reviews: [],

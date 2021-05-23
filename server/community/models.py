@@ -12,6 +12,9 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     # 기본 평점 5 최소 0 최대 10
     rank = models.PositiveIntegerField(default=5, validators=[MinValueValidator(0), MaxValueValidator(10)])
+    # 이 글에 좋아요를 누른 유저는 복수, 유저가 좋아요를 누른 글의 갯수도 복수 - M:N 관계
+    like_users = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_reviews')
+
 
 # 영화 리뷰 게시글의 댓글 모델
 class ReviewComment(models.Model):
