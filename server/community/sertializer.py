@@ -13,5 +13,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     reviewcomment_set = ReviewCommentSerializer(read_only=True, many=True)
     class Meta:
         model = Review
-        fields = '__all__'
+        # fields = ('id', 'title', 'movie_title', 'content', 'rank',)
+        # fields = '__all__'
+        exclude = ('user',)
 

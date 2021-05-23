@@ -41,6 +41,7 @@ def signup(request):
 def id_check(request):
     # id 데이터를 request에서 꺼내기
     request_username = request.data.get('username')
+    # 현재 user 테이블 안에 같은 유저 id명이 존재할 경우
     if User.objects.filter(username=request_username):
         return Response({'error': '중복된 ID입니다. 다른 ID를 입력해주세요.'}, status=status.HTTP_400_BAD_REQUEST)
     else:   

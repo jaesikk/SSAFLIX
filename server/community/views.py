@@ -22,6 +22,9 @@ def review_list_create(request):
         return Response(serializer.data)
     else: # POST
         serializer = ReviewSerializer(data=request.data)
+        print(serializer)
+        print(request.data)
+        print(serializer.is_valid())
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -31,6 +34,8 @@ def review_list_create(request):
 @authentication_classes([JSONWebTokenAuthentication])
 # 인증 확인 되었을 때만 권한 부여
 @permission_classes([IsAuthenticated])
+# 리뷰 게시글 상세 조회 (버튼 누르면), 수정, 삭제
+# 단 수정, 삭제는 작성 유저와 동일일 때
 def review_update_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':

@@ -1,7 +1,7 @@
 <template>
   <div>
   <h1> Create </h1>
-    <input type="text" v-model.trim="posts.title"> | 
+    <input type="text" v-model.trim="review.title"> | 
     <button @click="createReview">생성</button>
   </div>
 </template>
@@ -14,26 +14,27 @@ export default {
   name: 'CreateReview',
   data: function () {
     return {
-      posts: {
-        title: '',    
-        movie_title: '',
-        content: '',
-        created_at: '',
-        updated_at: '',
-        rank: '',
+      review: {
+        title: 'zz',    
+        movie_title: 'dd',
+        content: 'aa',
+        // created_at: '',
+        // updated_at: '',
+        rank: '4',
       }
     }
   },
   methods: {
     createReview: function () {
-      const review = {
-        posts: this.posts,
-      }
-      if (review.posts) {
+      // const reviewItem = {
+      //   review: this.review,
+      // }
+      // console.log(reviewItem.review)
+      if (this.review) {
         axios({
           method: 'POST',
           url: SERVER_URL + '/community/create/',
-          data: review,
+          data: this.review,
           headers: {
             Authorization: `JWT ${localStorage.getItem('jwt')}`
           }        
@@ -42,7 +43,7 @@ export default {
           this.$router.push({ name: 'Community' })
 
         }).catch((err) => {
-          console.log(err)
+          console.log(err.response)
         })
       }
     }
