@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import datetime
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -159,11 +160,10 @@ AUTH_USER_MODEL = 'accounts.User'
 #     ),
 # }
 
+
+
 # JST Token의 유효기간
 JWT_AUTH = {
+    'JWT_RESPONSE_PAYLOAD_HANDLER': 'accounts.views.jwt_response_payload_handler',
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),
-
-    'JWT_RESPONSE_PAYLOAD_HANDLER':
-    'accounts.views.jwt_response_payload_handler',
-    
 }
