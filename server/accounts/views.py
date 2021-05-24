@@ -58,26 +58,29 @@ def jwt_response_payload_handler(token, user=None, request=None):
         # 'userId': user.pk
     }
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 # 인증 여부 판단
 @authentication_classes([JSONWebTokenAuthentication])
 # 인증 확인 되었을 때만 권한 부여
 @permission_classes([IsAuthenticated])
 def follow(request, user_pk):
-    if request.user.is_authenticated:
-        person = get_object_or_404(get_user_model(), pk=user_pk)
-        user = request.user
+    person = get_object_or_404(get_user_model(), pk=user_pk)
+    user = request.user
+    if request.method == 'GET':
+        return Response({'isFollow': person.followers.filter(pk=user.pk).exists()})
+    else: # POST
         if person != user:
             if person.followers.filter(pk=user.pk).exists():
                 person.followers.remove(user)
-                follow = False
+                isFollow = False
             else:
                 person.followers.add(user)
-                follow = True
-        response_data = {
-            'follow' : follow,
-            'fiCnt' : user.followers.count(),
-            'fwCnt' : user.followings.count(),
-        }
-        return JsonResponse(response_data, status=200)
-    return HttpResponse(status=401)
+                isFollow = True
+            # response_data = {
+            #     'follow' : follow,
+            #     'fiCnt' : user.followers.count(),
+            #     'fwCnt' : user.followings.count(),
+            # }
+            # return Response(response_data, status=200)
+            return Response({'isFollow': isFollow})
+        return Response({'error': '본인 계정에는 팔로우를 할 수 없습니다.'})
