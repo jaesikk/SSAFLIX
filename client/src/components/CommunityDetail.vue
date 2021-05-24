@@ -1,9 +1,10 @@
 <template>
   <div>
-    <p>{{ review.title }}</p>
-    <p>{{ review.content }}</p>
+    <p>{{ nowReview.title }}</p>
+    <p>{{ nowReview.content }}</p>
     <button @click="onLiked" >{{ isLike ? '좋아요 취소' : '좋아요'}} </button>
-    <!-- <p>{{ isLike }}</p> -->
+    <button @click="onUpdate" > 수정 </button>
+    <button @click="onDelete" > 삭제 </button>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   data: function() {
     return {
       isLike: '',
+      nowReview: this.review,
     }
   },
   props: {
@@ -30,9 +32,6 @@ export default {
         method: 'POST',
         url: SERVER_URL + `/community/${this.review.id}/like/`,
         data: this.review,
-        headers: {
-          Authorization: `JWT ${localStorage.getItem('jwt')}`
-        }     
       }).then((res) => {
         console.log(res.data)
         this.isLike = res.data.isLike
@@ -41,8 +40,40 @@ export default {
         alert(err.response.data.error)
       })
     },
+    onUpdate: function() {
+      axios ({
+        method: 'PUT',
+        url: SERVER_URL + `/community/${this.review.id}/`,
+        data: {
+          title: this.nowReview.title,
+          movie_title: this.nowReview.movie_title,
+          content: this.nowReview.content + '_수정됨',
+          rank: this.nowReview.rank,
+        },    
+      }).then((res) => {
+        console.log(res.data)
+        this.nowReview = res.data
+      }).catch((err) => {
+        console.log(err.response)
+        alert(err.response.data.error)
+      })
+    },
+    onDelete: function() {
+      axios ({
+        method: 'DELETE',
+        url: SERVER_URL + `/community/${this.review.id}/`,
+        data: this.review,
+      }).then((res) => {
+        console.log(res.data)
+        this.review = res.data
+      }).catch((err) => {
+        console.log(err.response)
+        alert(err.response.data.error)
+      })
+    },
+    
   },
-  mounted:  function() {
+  mounted: function() {
     axios ({
       method: 'GET',
       url: SERVER_URL + `/community/${this.review.id}/like/`,
@@ -57,7 +88,12 @@ export default {
       console.log(err.response)
       // alert(err.response.data.error)
     })
-  }   
+  },
+  // computed: {
+  //   changeReview: function () {
+  //     return this.review
+  //   }
+  // }   
 }
 </script>
 

@@ -55,9 +55,9 @@ export default {
           method: 'POST',
           url: SERVER_URL + '/community/create/',
           data: this.review,
-          headers: {
-            Authorization: `JWT ${localStorage.getItem('jwt')}`
-          }        
+          // headers: {
+          //   Authorization: `JWT ${localStorage.getItem('jwt')}`
+          // }        
         }).then((res) => {
           console.log(res)
           this.$router.push({ name: 'Community' })

@@ -25,24 +25,29 @@
 
 <script>
 import axios from 'axios'
+import { mapState } from 'vuex'
 export default {
   name: 'App',
   data: function () {
     return {
-      isLogin: false,
+      // isLogin: false,
     }
   },
   methods: {
     onLogin: function () {
-      this.isLogin = true
-      console.log('onLogin')
+      // this.isLogin = true
+      // console.log(this.$store.state.isLogin)
+      // console.log(this.$store.state.accounts)
       axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
+      console.log(axios.defaults.headers.common['Authorization'])
     },
     onLogout: function () {
-      localStorage.removeItem('jwt')
-      this.isLogin = false
-      this.$router.push({ name: 'Login' })
+      // localStorage.removeItem('jwt')
+      // this.isLogin = false
+      this.$store.dispatch('logoutUser')
       axios.defaults.headers.common['Authorization'] = ''
+      console.log(axios.defaults.headers.common['Authorization'])
+      this.$router.push({ name: 'Login' })
     },
   },
   // 토큰을 가져오고, 있다면 onLogin 실행한다
@@ -51,6 +56,9 @@ export default {
     if (jwt) {
       this.onLogin()
     }
+  },
+  computed: {
+    ...mapState(['isLogin'])
   }
 }
 </script>

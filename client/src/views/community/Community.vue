@@ -37,13 +37,21 @@ export default {
   },
   methods: {
     getReviews: async function (){
-      const res = await axios({
-        method: 'GET',
-        url: SERVER_URL + '/community/create/'
-      })
-      console.log(res)
-      console.log('getReviews')
-      this.reviews = res.data
+      try{
+        const res = await axios({
+          method: 'GET',
+          url: SERVER_URL + '/community/create/',     
+          headers: {
+            Authorization: `JWT ${localStorage.getItem('jwt')}`
+          }
+        })
+        // console.log(res)
+        // console.log(res.data)
+        console.log('getReviews')
+        this.reviews = res.data
+      } catch (err) {
+        console.log(err.response)
+      }
     },
     delReview: function (review) {
       axios({
