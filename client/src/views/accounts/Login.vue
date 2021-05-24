@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
-const SERVER_URL = process.env.VUE_APP_SERVER_URL
+// const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'Login',
@@ -49,18 +49,22 @@ export default {
     }
   },
   methods: {
+    // login: function () {
+    //   axios({
+    //     method: 'POST',
+    //     url: SERVER_URL + '/accounts/api-token-auth/',
+    //     data: this.credentials,
+    //   }).then((res) => {
+    //     console.log(res.data.userId)
+    //     localStorage.setItem('jwt', res.data.token)
+    //     this.$emit('login')
+    //     // App에게 login 전달
+    //   })
+    // }
     login: function () {
-      axios({
-        method: 'POST',
-        url: SERVER_URL + '/accounts/api-token-auth/',
-        data: this.credentials,
-      }).then((res) => {
-        localStorage.setItem('jwt', res.data.token)
-        console.log(res)
-        this.$emit('login')
-        this.$router.push({ name: 'Home' }) 
-        // App에게 login 전달
-      })
+      this.$store.dispatch('getUser', this.credentials)
+      this.$router.push({ name: 'Home' }) 
+      this.$emit('login')
     }
   },
 }

@@ -7,7 +7,6 @@
           <router-link to="/" class="navbar-brand">Home</router-link> |
           <router-link :to="{ name: 'Recommend' }" class="navbar-brand">Recommend</router-link> |
           <router-link :to="{ name: 'Community' }" class="navbar-brand">Community</router-link> |
-          
           <span v-if="isLogin">
            <router-link to="#" @click.native="onLogout" class="navbar-brand">Logout</router-link>
           </span>
@@ -36,6 +35,7 @@ export default {
   methods: {
     onLogin: function () {
       this.isLogin = true
+      console.log('onLogin')
       axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
     },
     onLogout: function () {
@@ -43,7 +43,7 @@ export default {
       this.isLogin = false
       this.$router.push({ name: 'Login' })
       axios.defaults.headers.common['Authorization'] = ''
-    }
+    },
   },
   // 토큰을 가져오고, 있다면 onLogin 실행한다
   created: function () {

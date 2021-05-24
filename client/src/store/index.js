@@ -14,18 +14,33 @@ export default new Vuex.Store({
     ADD_MOVIE: function (state, movieList) {
       state.movies = movieList
     },
-    
+    ADD_USER: function (state, userId) {
+      state.accounts = userId
+    }
   },
   actions: {
     getMovies: function (context) {
       axios({
-        method: 'get',
+        method: 'GET',
         url: SERVER_URL + '/movies/',
       }).then((res) => {
         context.commit('ADD_MOVIE', res.data)
       })
     },
-    
+    // credetials에 담아서 ADD_USER를 동작시킨다.
+    getUser: function (context, credentials) {
+      axios({
+        method: 'POST',
+        url: SERVER_URL + '/accounts/api-token-auth/',
+        data: credentials,
+      }).then((res) => {
+        context.commit('ADD_USER', res.data.userId)
+        localStorage.setItem('jwt', res.data.token)
+        console.log(this.state.accounts)
+        console.log('vuex')
+        console.log(res)
+      })
+    }
   },
   modules: {
   }
