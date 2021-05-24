@@ -52,10 +52,8 @@ export default {
       })
       .then((res) => {
         this.getReviews()
-        console.log(res)
       })
       .catch((err) => {
-        console.log(err.response)
         alert(err.response.data.error)
       })
     },
