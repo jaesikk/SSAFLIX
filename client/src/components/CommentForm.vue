@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="comment" @keyup.enter="getComments">
+    <input type="text" v-model="comment" @keyup.enter="createComment">
     <p>{{ review }}</p>
   </div>
 </template>
@@ -22,18 +22,22 @@ export default {
     }
   },
   methods: {
-    getComments: function () {
+    createComment: function () {
       axios({
-        method: 'GET',
+        method: 'POST',
         url: SERVER_URL + `/community/${this.review.id}/comments/`,
-      })
-      . then((res) => {
+        data: this.comment,
+        // headers: {
+        //   Authorization: `JWT ${localStorage.getItem('jwt')}`
+        // }        
+      }).then((res) => {
         console.log(res)
+        this.$router.push({ name: 'Community' })
+
+      }).catch((err) => {
+        console.log(err.response)
       })
-      .catch((err) => {
-        console.log(err)
-      })
-    },
+    }
   }
 }
 </script>

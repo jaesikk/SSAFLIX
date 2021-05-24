@@ -16,7 +16,7 @@
     <div>
       <CommentForm :review="review"/>
       <ul>
-        <CreateComment v-for="comment in comments" :key="comment.id" :review="review" />
+        <!-- <CreateComment v-for="comment in comments" :key="comment.id" :review="review" /> -->
       </ul>
     </div>
     <hr>
@@ -26,15 +26,15 @@
 <script>
 import { mapState } from 'vuex'
 import axios from 'axios'
-import CreateComment from '@/components/CreateComment.vue'
 import CommentForm from '@/components/CommentForm.vue'
+// import CreateComment from '@/components/CreateComment.vue'
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'ReviewDetail',
   components: {
-    CreateComment,
     CommentForm,
+    // CreateComment,
   },
   props: {
     review: Object,
@@ -71,7 +71,18 @@ export default {
         this.getReviews()
       })
     },
-
+    getComments: function () {
+      axios({
+        method: 'GET',
+        url: SERVER_URL + `/community/${this.review.id}/comments/`,
+      })
+      . then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
 
     checkId: function () {
       console.log((this.$store.state.accounts))
