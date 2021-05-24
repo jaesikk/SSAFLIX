@@ -2,7 +2,8 @@
   <div>
     <p>{{ review.title }}</p>
     <p>{{ review.content }}</p>
-    <button @click="liked"> 좋아요 </button>
+    <button @click="onLiked" >{{ isLike ? '좋아요 취소' : '좋아요'}} </button>
+    <!-- <p>{{ isLike }}</p> -->
   </div>
 </template>
 
@@ -14,7 +15,7 @@ export default {
   name: 'CommunityDetail',
   data: function() {
     return {
-      // isLike = 
+      isLike: '',
     }
   },
   props: {
@@ -23,22 +24,40 @@ export default {
       required: true,
     }
   },
-  method: {
-    liked: function() {
+  methods: {
+    onLiked: function() {
       axios ({
         method: 'POST',
-        url: SERVER_URL + `/community/${this.review.pk}/like/`,
+        url: SERVER_URL + `/community/${this.review.id}/like/`,
         data: this.review,
         headers: {
           Authorization: `JWT ${localStorage.getItem('jwt')}`
         }     
       }).then((res) => {
         console.log(res.data)
+        this.isLike = res.data.isLike
       }).catch((err) => {
         console.log(err.response)
+        alert(err.response.data.error)
       })
-    }
-  }
+    },
+  },
+  mounted:  function() {
+    axios ({
+      method: 'GET',
+      url: SERVER_URL + `/community/${this.review.id}/like/`,
+      data: this.review,
+      headers: {
+        Authorization: `JWT ${localStorage.getItem('jwt')}`
+      }     
+    }).then((res) => {
+      // console.log(res.data)
+      this.isLike = res.data.isLike
+    }).catch((err) => {
+      console.log(err.response)
+      // alert(err.response.data.error)
+    })
+  }   
 }
 </script>
 

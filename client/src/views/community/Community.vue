@@ -12,10 +12,11 @@
           } }"
           class="navbar-brand">{{ review.title }}</router-link> |
         <button @click="delReview(review)">X</button>
-
+  
       </li>
     </ul>
-    <CommunityDetail v-for="review in reviews" :key="review.pk" :review="review" />
+    <CommunityDetail v-for="review in reviews" :key="review.id" :review="review" />
+    <button @click="getReviews" > 정보 가져오기</button>
   </div>
 </template>
 
@@ -26,7 +27,7 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'Community',
-  component: {
+  components: {
     CommunityDetail,
   },
   data: function () {
@@ -70,13 +71,14 @@ export default {
     // }
   },
   created: function () {
-    if (this.isLogin) {
-      console.log('isLogin')
-      this.getReviews()
-    } else {
-      this.$router.push({ name: 'Login' })
-      alert('로그인이 필요합니다.')
-    }
+    // if (this.isLogin) {
+    //   console.log('isLogin')
+    //   this.getReviews()
+    // } else {
+    //   this.$router.push({ name: 'Login' })
+    //   alert('로그인이 필요합니다.')
+    // }
+    this.getReviews()
   }
 }
 </script>

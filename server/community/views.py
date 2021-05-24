@@ -83,18 +83,29 @@ def review_comment_delete(request, review_pk, comment_pk):
     else:
         return Response({'error': '작성자와 같은 유저가 아닙니다.'})
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 # 인증 여부 판단
 @authentication_classes([JSONWebTokenAuthentication])
 # 인증 확인 되었을 때만 권한 부여
 @permission_classes([IsAuthenticated])
 def like(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-    if request.user != review.user:
-        if review.like_users.filter(pk=request.user.pk).exists() :
-            review.like_users.remove(request.user)
-        else :
-            review.like_users.add(request.user)
-        return Response({'isLike': not request.data.isLike})
-    return Response({'error': '본인 글에는 좋아요를 할 수 없습니다.'})
+    # GET - 좋아요 여부 반환
+    if request.method == 'GET':
+        print(review.like_users.filter(pk=request.user.pk).exists())
+        return Response({'isLike': review.like_users.filter(pk=request.user.pk).exists()})
+    else: # POST - 좋아요 기능 
+        # 작성글 유저와 현재 접속한 유저가 다를 때만 좋아요 기능 활성화
+        if request.user != review.user:
+            # 기존에 요청이 들어온 Like의 반대로 보냄
+            # 지금 좋아요를 누른 상태면 삭제
+            if review.like_users.filter(pk=request.user.pk).exists():
+                review.like_users.remove(request.user)
+                return Response({'isLike': False})
+            # 좋아요를 누르지 않은 상태면 추가
+            else :
+                review.like_users.add(request.user)
+                return Response({'isLike': True})
+        # 작성글 유저와 접속한 유저가 같음 = 본인이므로 좋아요 못하게 막음
+        return Response({'error': '본인 글에는 좋아요를 할 수 없습니다.'})
     

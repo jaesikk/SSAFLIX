@@ -14,4 +14,4 @@ urlpatterns = [
     # 해당 게시글에 달린 특정 댓글 조회, 삭제
     path('<int:review_pk>/comments/<int:comment_pk>/', views.review_comment_delete),
     # 해당 게시글에 좋아요 기능
-    path('<int:review_pk>/like', views.like),]
+    path('<int:review_pk>/like/', views.like),]
