@@ -22,9 +22,9 @@ def review_list_create(request):
         return Response(serializer.data)
     else: # POST
         serializer = ReviewSerializer(data=request.data)
-        print(serializer)
-        print(request.data)
-        print(serializer.is_valid())
+        # print(serializer)
+        # print(request.data)
+        # print(serializer.is_valid())
         if serializer.is_valid(raise_exception=True):
             serializer.save(user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -38,14 +38,18 @@ def review_list_create(request):
 # 단 수정, 삭제는 작성 유저와 동일일 때
 def review_update_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
+    print(request.user)
     if request.method == 'GET':
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
     elif request.method == 'PUT':
-        serializer = ReviewSerializer(review, data=request.data)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-            return Response(serializer.data)
+        if request.user == review.user:
+            serializer = ReviewSerializer(review, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+        else:
+            return Response({'error': '작성자와 같은 유저가 아닙니다.'}, status=status.HTTP_400_BAD_REQUEST)
     else: # DELETE
         if request.user == review.user:
             review.delete()
@@ -92,7 +96,7 @@ def like(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     # GET - 좋아요 여부 반환
     if request.method == 'GET':
-        print(review.like_users.filter(pk=request.user.pk).exists())
+        # print(review.like_users.filter(pk=request.user.pk).exists())
         return Response({'isLike': review.like_users.filter(pk=request.user.pk).exists()})
     else: # POST - 좋아요 기능 
         # 작성글 유저와 현재 접속한 유저가 다를 때만 좋아요 기능 활성화

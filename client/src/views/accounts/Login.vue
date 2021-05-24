@@ -62,9 +62,9 @@ export default {
     //   })
     // }
     login: function () {
-      this.$store.dispatch('getUser', this.credentials)
-      this.$router.push({ name: 'Home' }) 
+      this.$store.dispatch('loginUser', this.credentials)
       this.$emit('login')
+      this.$router.push({ name: 'Home' }) 
     }
   },
 }

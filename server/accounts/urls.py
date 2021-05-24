@@ -16,5 +16,5 @@ urlpatterns = [
     # id 중복 체크 url
     path('id-check/', views.id_check),
     # 해당 유저에 팔로우
-    # path('<int:user_pk>/follow', views.follow),
+    path('<int:user_pk>/follow', views.follow),
 ]

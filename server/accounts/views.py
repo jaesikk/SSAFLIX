@@ -1,9 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .serializer import UserSerializer
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import User
+from django.contrib.auth import get_user_model
+
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 # id 중복 확인 체크 기능
 
@@ -51,5 +55,29 @@ def jwt_response_payload_handler(token, user=None, request=None):
     return {
         'token': token,
         'user': UserSerializer(user, context={'request': request}).data,
-        'userId': user.pk
+        # 'userId': user.pk
     }
+
+@api_view(['POST'])
+# 인증 여부 판단
+@authentication_classes([JSONWebTokenAuthentication])
+# 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
+def follow(request, user_pk):
+    if request.user.is_authenticated:
+        person = get_object_or_404(get_user_model(), pk=user_pk)
+        user = request.user
+        if person != user:
+            if person.followers.filter(pk=user.pk).exists():
+                person.followers.remove(user)
+                follow = False
+            else:
+                person.followers.add(user)
+                follow = True
+        response_data = {
+            'follow' : follow,
+            'fiCnt' : user.followers.count(),
+            'fwCnt' : user.followings.count(),
+        }
+        return JsonResponse(response_data, status=200)
+    return HttpResponse(status=401)
