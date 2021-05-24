@@ -7,7 +7,7 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default new Vuex.Store({
   state: {
-    accounts: [],
+    accounts: '',
     movies: [],
   },
   mutations: {
@@ -27,7 +27,7 @@ export default new Vuex.Store({
         context.commit('ADD_MOVIE', res.data)
       })
     },
-    // credetials에 담아서 ADD_USER를 동작시킨다.
+  // credetials에 담아서 ADD_USER를 동작시킨다.
     getUser: function (context, credentials) {
       axios({
         method: 'POST',

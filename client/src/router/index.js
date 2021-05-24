@@ -42,12 +42,11 @@ const routes = [
     component: CreateReview
   },
   {
-    path: '/community/:reviewTitle/ReviewDetail',
+    path: '/community/:review/ReviewDetail',
     name: 'ReviewDetail',
     component: ReviewDetail,
     props: route => ({
-      reviewTitle: String(route.params.reviewTitle),
-      reviewContent: String(route.params.reviewContent),
+      review: route.params.review,
     }),
   },
 ]

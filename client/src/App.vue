@@ -35,7 +35,6 @@ export default {
   methods: {
     onLogin: function () {
       this.isLogin = true
-      console.log('onLogin')
       axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
     },
     onLogout: function () {

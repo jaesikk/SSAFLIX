@@ -1,6 +1,8 @@
 <template>
   <div>
   <h1> Create </h1>
+    <router-link :to="{ name: 'Community' }" class="d-flex justify-content-end ml-3">back</router-link>
+
     <div class="text-muted">
 
       <div>

@@ -3,20 +3,14 @@
     <h1>Community</h1>
     <router-link :to="{ name: 'CreateReview' }" class="navbar-brand d-flex justify-content-end ml-3">게시글 생성</router-link>
     <ul>
-      <li v-for="review in reviews" :key="review.id">
+      <li v-for="review in reviews" :key="review.id" :review="review">
         <router-link
-        :to="{ name: 'ReviewDetail',
-        params: {
-          reviewTitle: review.title,
-          reviewContent: review.content,
-          } }"
-          class="navbar-brand">{{ review.title }}</router-link> |
-        <button @click="delReview(review)">X</button>
-  
+        :to="{ name: 'ReviewDetail', params: {review: review} }"
+          class="navbar-brand">{{ review.title }}</router-link>  
       </li>
     </ul>
     <CommunityDetail v-for="review in reviews" :key="review.id" :review="review" />
-    <button @click="getReviews" > 정보 가져오기</button>
+    <!-- <button @click="getReviews" > 정보 가져오기</button> -->
   </div>
 </template>
 
@@ -27,6 +21,12 @@ const SERVER_URL = process.env.VUE_APP_SERVER_URL
 
 export default {
   name: 'Community',
+  props: {
+    isLogin: {
+      type: Boolean,
+      required: true,
+    }
+  },
   components: {
     CommunityDetail,
   },
@@ -44,39 +44,17 @@ export default {
       console.log(res)
       console.log('getReviews')
       this.reviews = res.data
+      console.log(this.reviews)
     },
-    delReview: function (review) {
-      axios({
-        method: 'delete',
-        url: `${SERVER_URL}/community/${review.id}/`,
-      })
-      .then((res) => {
-        this.getReviews()
-      })
-      .catch((err) => {
-        alert(err.response.data.error)
-      })
-    },
-    // updateReviews: function (review) {
-    //   axios({
-    //     method: 'PUT',
-    //     url: SERVER_URL + `community/${review.id}/`
-    //   }).then((res) => {
-    //     console.log(res)
-    //     console.log('updated')
-    //     this.getReviews()
-    //   })
-    // }
   },
-  created: function () {
-    // if (this.isLogin) {
-    //   console.log('isLogin')
-    //   this.getReviews()
-    // } else {
-    //   this.$router.push({ name: 'Login' })
-    //   alert('로그인이 필요합니다.')
-    // }
-    this.getReviews()
+  mounted: function () {
+    if (this.isLogin) {
+      this.getReviews()
+    } else {
+      this.$router.push({ name: 'Login' })
+      alert('로그인이 필요합니다.')
+    }
+    // this.getReviews()
   }
 }
 </script>
