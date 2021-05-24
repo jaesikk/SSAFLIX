@@ -1,7 +1,6 @@
 <template>
   <div>
     <input type="text" v-model="comment" @keyup.enter="createComment">
-    <p>{{ review }}</p>
   </div>
 </template>
 
@@ -22,22 +21,19 @@ export default {
     }
   },
   methods: {
+    // data를 {}로 감싸주어 형태에 맞게 접근
     createComment: function () {
       axios({
         method: 'POST',
         url: SERVER_URL + `/community/${this.review.id}/comments/`,
-        data: this.comment,
-        // headers: {
-        //   Authorization: `JWT ${localStorage.getItem('jwt')}`
-        // }        
+        data: {content: this.comment},
       }).then((res) => {
+        this.$emit('getComments')
         console.log(res)
-        this.$router.push({ name: 'Community' })
-
       }).catch((err) => {
         console.log(err.response)
       })
-    }
+    },
   }
 }
 </script>
