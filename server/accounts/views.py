@@ -64,11 +64,15 @@ def jwt_response_payload_handler(token, user=None, request=None):
 # 인증 확인 되었을 때만 권한 부여
 @permission_classes([IsAuthenticated])
 def follow(request, user_pk):
+    # 현재 팔로우 될 유저 객체(요청 받은 아이디 = 대상)
     person = get_object_or_404(get_user_model(), pk=user_pk)
+    # 현재 팔로우 할 유저 객체(현재 접속 중인 유저 = 나)
     user = request.user
     if request.method == 'GET':
+        # 현재 해당 유저의 팔로우 여부 반환
         return Response({'isFollow': person.followers.filter(pk=user.pk).exists()})
     else: # POST
+        # 현재 접속한 유저가 자신에게 팔로우하는 것을 막기
         if person != user:
             if person.followers.filter(pk=user.pk).exists():
                 person.followers.remove(user)

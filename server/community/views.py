@@ -17,10 +17,12 @@ from .sertializer import ReviewCommentSerializer, ReviewSerializer
 @permission_classes([IsAuthenticated])
 def review_list_create(request):
     if request.method == 'GET':
+        # 전체 리뷰 리스트 반환
         review_list = Review.objects.all()
         serializer = ReviewSerializer(review_list, many=True)
         return Response(serializer.data)
     else: # POST
+        # 현재 들어온 요청 리뷰 데이터를 기반으로 유효성 검사 후 새롭게 생성
         serializer = ReviewSerializer(data=request.data)
         # print(serializer)
         # print(request.data)
@@ -43,7 +45,9 @@ def review_update_delete(request, review_pk):
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
     elif request.method == 'PUT':
+        # 수정하려면 작성자 본인만 가능
         if request.user == review.user:
+            # 원본 리뷰 객체 (id 식별)에 현재 데이터를 집어넣기
             serializer = ReviewSerializer(review, data=request.data)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
@@ -66,26 +70,36 @@ def review_update_delete(request, review_pk):
 def review_comment_create(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     if request.method == 'GET':
+        # 해당 리뷰에 달린 댓글 전체 조회
         comment_list = review.reviewcomment_set.all()
         serializer = ReviewCommentSerializer(comment_list, many=True)
         return Response(serializer.data)
     else: # POST
         serializer = ReviewCommentSerializer(data=request.data)
+        # 유효성 검사, 통과못하면 400 에러
         if serializer.is_valid(raise_exception=True):
+            # user, review는 외래키로 관리하고, request user부분과 review 부분에서 식별이 가능하므로 이렇게 적어야함.
+            # 시리얼라이저는 두개를 읽는 용으로만 사용하므로 개발자가 직접 넣어줘야함.
             serializer.save(review=review, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET', 'DELETE'])
+# 인증 여부 판단
+@authentication_classes([JSONWebTokenAuthentication])
+# 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
 def review_comment_delete(request, review_pk, comment_pk):
     comment = get_object_or_404(ReviewComment, pk=comment_pk)
     serializer = ReviewCommentSerializer(comment)
     if request.method == 'GET':
         return Response(serializer.data)
-    if request.user == comment.user:
-        comment.delete()
-        return Response({ 'id': comment_pk })
-    else:
-        return Response({'error': '작성자와 같은 유저가 아닙니다.'})
+    else: # DELETE
+        # 작성자 본인일때만 삭제 가능
+        if request.user == comment.user:
+            comment.delete()
+            return Response({ 'id': comment_pk })
+        else:
+            return Response({'error': '작성자와 같은 유저가 아닙니다.'})
 
 @api_view(['GET', 'POST'])
 # 인증 여부 판단

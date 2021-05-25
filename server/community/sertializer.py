@@ -12,6 +12,7 @@ class ReviewCommentSerializer(serializers.ModelSerializer):
         # 유저는 외래키이고, 우리가 별도로 입력해서 넣는 것이 아닌 
         # request.user를 통해 해당 유저를 식별해서 넣을 것이므로 관리 X
         # exclude = ('user', )
+        # 기존에는 exclude로 썼지만, 데이터 응답시 보여주기 위해서 read_only로 바꿈
         read_only_fields = ('user', 'review',)
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -24,5 +25,6 @@ class ReviewSerializer(serializers.ModelSerializer):
         # 유저는 외래키이고, 우리가 별도로 입력해서 넣는 것이 아닌 
         # request.user를 통해 해당 유저를 식별해서 넣을 것이므로 관리 X
         # exclude = ('user',)
+        # 기존에는 exclude로 썼지만, 데이터 응답시 보여주기 위해서 read_only로 바꿈
         read_only_fields = ('user', 'like_users',)
 
