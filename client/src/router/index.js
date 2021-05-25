@@ -3,8 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/accounts/Login.vue'
 import Signup from '../views/accounts/Signup.vue'
+import Profile from '../views/accounts/Profile.vue'
 import Community from '../views/community/Community.vue'
 import CreateReview from '../views/community/CreateReview.vue'
+import UpdateReview from '../views/community/UpdateReview.vue'
 import ReviewDetail from '../views/community/ReviewDetail.vue'
 import Recommend from '../views/movies/Recommend.vue'
 
@@ -27,6 +29,15 @@ const routes = [
     component: Signup
   },
   {
+    path: '/accounts/:reviewUser/Profile',
+    name: 'Profile',
+    component: Profile,
+    props: route => ({
+      reviewUser: Number(route.params.review),
+      review: route.params.review,
+    }),
+  },
+  {
     path: '/community/Community',
     name: 'Community',
     component: Community
@@ -45,6 +56,14 @@ const routes = [
     path: '/community/:review/ReviewDetail',
     name: 'ReviewDetail',
     component: ReviewDetail,
+    props: route => ({
+      review: route.params.review,
+    }),
+  },
+  {
+    path: '/community/:review/UpdateReview',
+    name: 'UpdateReview',
+    component: UpdateReview,
     props: route => ({
       review: route.params.review,
     }),

@@ -16,7 +16,7 @@
       </div>
       <div>
         <input type="number" v-model.trim="review.rank"> | 
-      </div>
+      </div> 
       <button @click="createReview">생성</button>
     </div>
   </div>

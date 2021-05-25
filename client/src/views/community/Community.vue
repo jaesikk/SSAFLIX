@@ -9,6 +9,7 @@
           class="navbar-brand">{{ review.title }}</router-link>  
       </li>
     </ul>
+    <hr>
     <CommunityDetail v-for="review in reviews" :key="review.id" :review="review" />
     <!-- <button @click="getReviews" > 정보 가져오기</button> -->
   </div>

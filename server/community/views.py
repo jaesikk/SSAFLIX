@@ -99,7 +99,7 @@ def review_comment_delete(request, review_pk, comment_pk):
             comment.delete()
             return Response({ 'id': comment_pk })
         else:
-            return Response({'error': '작성자와 같은 유저가 아닙니다.'})
+            return Response({'error': '작성자와 같은 유저가 아닙니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
 # 인증 여부 판단
@@ -125,5 +125,5 @@ def like(request, review_pk):
                 review.like_users.add(request.user)
                 return Response({'isLike': True})
         # 작성글 유저와 접속한 유저가 같음 = 본인이므로 좋아요 못하게 막음
-        return Response({'error': '본인 글에는 좋아요를 할 수 없습니다.'})
+        return Response({'error': '본인 글에는 좋아요를 할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
     

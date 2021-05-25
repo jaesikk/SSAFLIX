@@ -67,7 +67,7 @@ export default {
       }).then((res) => {
         console.log(res.data)
         this.nowReview = res.data
-      }).catch((err) => {
+      }).catch((err ) => {
         console.log(err.response)
         alert(err.response.data.error)
       })
