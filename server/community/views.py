@@ -72,7 +72,7 @@ def review_comment_create(request, review_pk):
     else: # POST
         serializer = ReviewCommentSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
-            serializer.save(review=review)
+            serializer.save(review=review, user=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET', 'DELETE'])
