@@ -80,13 +80,13 @@ def follow(request, user_pk):
             else:
                 person.followers.add(user)
                 isFollow = True
-            # response_data = {
-            #     'follow' : follow,
-            #     'fiCnt' : user.followers.count(),
-            #     'fwCnt' : user.followings.count(),
-            # }
+            followData = {
+                # 'follow' : follow,
+                'fiCnt' : user.followers.count(),
+                'fwCnt' : user.followings.count(),
+            }
             # return Response(response_data, status=200)
-            return Response({'isFollow': isFollow})
+            return Response({'isFollow': isFollow, 'followData': followData})
         return Response({'error': '본인 계정에는 팔로우를 할 수 없습니다.'})
 
 
@@ -97,5 +97,13 @@ def follow(request, user_pk):
 @permission_classes([IsAuthenticated])
 def user_detail(request, user_pk):
     user = get_object_or_404(get_user_model(), pk=user_pk)
+    followData = {
+        # 'follow' : follow,
+        'fiCnt' : user.followers.count(),
+        'fwCnt' : user.followings.count(),
+    }
+    print(UserSerializer)
+    # serializer = UserSerializer(user, followData=followData)
     serializer = UserSerializer(user)
+    print(serializer)
     return Response(serializer.data)
