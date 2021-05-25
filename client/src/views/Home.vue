@@ -34,10 +34,10 @@ export default {
     MovieCard
   },
   mounted: function () {
-    this.$nextTick(function () {
-      this.$store.dispatch('getMovies')
-      console.log('getMovies_Home.vue')
-    })
+    this.$store.dispatch('getMovies')
+    console.log('getMovies_Home.vue')
+    // this.$nextTick(function () {
+    // })
   },
   computed: {
     ...mapState(['movies'])
