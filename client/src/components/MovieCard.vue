@@ -1,7 +1,7 @@
 <template>
   <div class="gui-card">
     <div class="gui-card__media">
-      <img class="gui-card__img" :src="poster" alt=""  />
+      <img class="gui-card__img" :src="poster" alt=""/>
     </div>
     <div class="gui-card__details">
       <div class="gui-card__title">
@@ -26,6 +26,12 @@ export default {
     return {
       poster: "https://image.tmdb.org/t/p/w500/" + String(this.movie.poster_path)
     }
+  },
+  methods: {
+    // Movie: function () {
+    //   this.$emit('onClick', this.movie)
+    //   console.log(this.movie)
+    // }
   }
 }
 

@@ -30,20 +30,19 @@ export default {
   name: 'App',
   data: function () {
     return {
-      // isLogin: false,
+      isLogin: false,
     }
   },
   methods: {
     onLogin: function () {
-      // this.isLogin = true
+      this.isLogin = true
       // console.log(this.$store.state.isLogin)
       // console.log(this.$store.state.accounts)
-      axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
-      console.log(axios.defaults.headers.common['Authorization'])
+      // axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
     },
     onLogout: function () {
-      // localStorage.removeItem('jwt')
-      // this.isLogin = false
+      localStorage.removeItem('jwt')
+      this.isLogin = false
       this.$store.dispatch('logoutUser')
       axios.defaults.headers.common['Authorization'] = ''
       console.log(axios.defaults.headers.common['Authorization'])

@@ -1,14 +1,13 @@
 <template>
   <div>
     <h1>{{ review.title }}</h1>
-    <router-link :to="{ name: 'Profile', params: {reviewUser: review.user, review: review}}">작성자 {{ review.user }}의 프로필</router-link> |
+    <router-link :to="{ name: 'Profile', params: {reviewUser: review.user, review: review}}">작성자 프로필로 이동</router-link>
     <!-- {{ review }} -->
 
-    <div class="d-flex justify-content-end ml-3">
-      <router-link :to="{ name: 'Community' }">back</router-link> |
-      <hr>
-      <div v-if="check">
-        <router-link :to="{ name: 'UpdateReview', params: {review: review} }">수정</router-link> |
+    <div>
+      <router-link :to="{ name: 'Community' }" class="d-flex justify-content-end ml-3">back</router-link>
+      <div v-if="check" class="d-flex justify-content-end ml-3">
+        <router-link :to="{ name: 'UpdateReview', params: {reviewId: review.id, review: review} }">수정</router-link> |
         <button @click="delReview(review)">삭제</button>
       </div>
     </div>
@@ -19,7 +18,7 @@
     <h2>{{ review.movie_title }} 후기</h2>
       <p>평점: {{ review.rank }}</p>
       <p>글 내용: {{ review.content }}</p>
-    <button @click="checkId">CHECKID버튼</button>
+    <!-- <button @click="checkId">CHECKID버튼</button> -->
     <hr>
     <div>
       <CommentForm @getComments="getComments" :review="review"/>
@@ -75,6 +74,7 @@ export default {
         alert(err.response.data.error)
       })
     },
+    //
     // review.id가 router에서 props Object()로 감싸주어 review에 접근하지 못했었음
     // CommentForm에서 emit을 받아와 getComments
     getComments: function () {

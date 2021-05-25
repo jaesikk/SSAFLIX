@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>UPDATE</h1>
-      <router-link :to="{ name: 'ReviewDetail' }" class="navbar-brand d-flex justify-content-end ml-3">back</router-link>
+      <router-link :to="{ name: 'ReviewDetail', params: {reviewId: review.id, review: review} }" class="navbar-brand d-flex justify-content-end ml-3">back</router-link>
       {{ review.title }}
         <div class="text-muted">
 

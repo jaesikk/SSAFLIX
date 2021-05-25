@@ -87,7 +87,7 @@ def follow(request, user_pk):
             }
             # return Response(response_data, status=200)
             return Response({'isFollow': isFollow, 'followData': followData})
-        return Response({'error': '본인 계정에는 팔로우를 할 수 없습니다.'})
+        return Response({'error': '본인 계정에는 팔로우를 할 수 없습니다.'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['GET'])

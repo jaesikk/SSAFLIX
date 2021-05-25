@@ -6,16 +6,16 @@
     <div class="text-muted">
 
       <div>
-        <input type="text" v-model.trim="review.title"> | 
+        <input type="text" placeholder="글 제목" v-model.trim="review.title"> | 
       </div>
       <div>
-        <input type="text" v-model.trim="review.movie_title"> | 
+        <input type="text" placeholder="영화 제목" v-model.trim="review.movie_title"> | 
       </div>
       <div>
-        <input type="text" v-model.trim="review.content"> | 
+        <input type="text" placeholder="글 내용" v-model.trim="review.content"> | 
       </div>
       <div>
-        <input type="number" v-model.trim="review.rank"> | 
+        <input type="number" placeholder="5" v-model.trim="review.rank"> | 
       </div> 
       <button @click="createReview">생성</button>
     </div>
@@ -37,9 +37,9 @@ export default {
   data: function () {
     return {
       review: {
-        title: '글 제목',    
-        movie_title: '영화 제목',
-        content: '글 내용',
+        title: '',    
+        movie_title: '',
+        content: '',
         created_at: '',
         updated_at: '',
         rank: '',
