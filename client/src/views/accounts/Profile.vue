@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>Profile</h1>
+    <h1>{{ user.username }}'s Profile</h1>
     <span>{{ reviewUser }}</span>
-    {{ review }}
+    <!-- {{ review }} -->
     <div>
       <!-- <button @click="onFollow" >{{ isFollow ? '팔로우 취소' : '팔로우'}} </button> -->
     </div>
+    <button @click="getUser">정보가져오기</button>
   </div>
 </template>
 
@@ -20,25 +21,45 @@ export default {
     reviewUser: Number,
     review: Object,
   },
-  // data: function () {
-  //   nowReview: this.review,
-  //   isFollow: '',
-  // },
+  data: function () {
+    return {
+      // nowReview: this.review,
+      isFollow: false,
+      user: [],
+    }
+  },
   computed: {
     ...mapState(['accounts'])
   },
-  onFollow: function() {
-    axios ({
-      method: 'POST',
-      url: SERVER_URL + `/accounts/${this.nowReview.user}/follow/`,
-    }).then((res) => {
-      console.log(res.data)
-      this.isFollow = res.data.isFollow
-    }).catch((err) => {
-      console.log(err.response)
-      alert(err.response.data.error)
-    })
+  methods: {
+    onFollow: function() {
+      axios ({
+        method: 'POST',
+        url: SERVER_URL + `/accounts/${this.review.user}/follow/`,
+      }).then((res) => {
+        console.log(res.data)
+        this.isFollow = res.data.isFollow
+      }).catch((err) => {
+        console.log(err.response)
+        alert(err.response.data.error)
+      })
+      },
+    getUser: function() {
+      axios ({
+        method: 'GET',
+        url: SERVER_URL + `/accounts/${this.review.user}/`,
+      }).then((res) => {
+        console.log(res.data)
+        this.user = res.data
+      }).catch((err) => {
+        console.log(err.response)
+        alert(err.response.data.error)
+      })
+    },
   },
+  mounted: function () {
+    this.getUser()
+  }
 }
 </script>
 

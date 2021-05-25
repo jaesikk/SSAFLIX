@@ -88,3 +88,14 @@ def follow(request, user_pk):
             # return Response(response_data, status=200)
             return Response({'isFollow': isFollow})
         return Response({'error': '본인 계정에는 팔로우를 할 수 없습니다.'})
+
+
+@api_view(['GET'])
+# 인증 여부 판단
+@authentication_classes([JSONWebTokenAuthentication])
+# 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
+def user_detail(request, user_pk):
+    user = get_object_or_404(get_user_model(), pk=user_pk)
+    serializer = UserSerializer(user)
+    return Response(serializer.data)

@@ -17,4 +17,6 @@ urlpatterns = [
     path('id-check/', views.id_check),
     # 해당 유저에 팔로우
     path('<int:user_pk>/follow/', views.follow),
+    # 유저 프로필을 위해 유저 정보를 가져오는 곳
+    path('<int:user_pk>/', views.user_detail),
 ]

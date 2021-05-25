@@ -32,10 +32,11 @@ const routes = [
     path: '/accounts/:reviewUser/Profile',
     name: 'Profile',
     component: Profile,
-    props: route => ({
-      reviewUser: Number(route.params.review),
-      review: route.params.review,
-    }),
+    // props: route => ({
+    //   reviewUser: Number(route.params.review),
+    //   review: route.params.review,
+    // }),
+    props: true,
   },
   {
     path: '/community/Community',
