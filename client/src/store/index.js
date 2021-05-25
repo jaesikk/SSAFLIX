@@ -30,6 +30,7 @@ export default new Vuex.Store({
       state.accounts.userId = ''
       state.accounts.username = ''
       state.isLogin = false
+      state.token= ''
     }
   },
   actions: {
@@ -50,11 +51,9 @@ export default new Vuex.Store({
       }).then((res) => {
         context.commit('ADD_USER', res.data)
         // axios.defaults.headers.common['Authorization'] = `JWT ${res.data.token}`
-        axios.defaults.headers.common['Authorization'] = `JWT ${this.state.token}`
+        console.log(res.data)
+        axios.defaults.headers.common['Authorization'] = `JWT ${context.state.token}`
         localStorage.setItem('jwt', res.data.token)
-        // console.log(this.state.accounts)
-        // console.log('vuex')
-        // console.log(res)
       })
     },
     logoutUser: function (context) {

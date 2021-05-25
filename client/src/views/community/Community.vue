@@ -5,7 +5,7 @@
     <ul>
       <li v-for="review in reviews" :key="review.id" :review="review">
         <router-link
-        :to="{ name: 'ReviewDetail', params: {review: review} }"
+        :to="{ name: 'ReviewDetail', params: {reviewId: review.id, review: review} }"
           class="navbar-brand">{{ review.title }}</router-link>  
       </li>
     </ul>
@@ -42,9 +42,9 @@ export default {
         const res = await axios({
           method: 'GET',
           url: SERVER_URL + '/community/create/',     
-          headers: {
-            Authorization: `JWT ${localStorage.getItem('jwt')}`
-          }
+          // headers: {
+          //   Authorization: `JWT ${localStorage.getItem('jwt')}`
+          // }
         })
         // console.log(res)
         // console.log(res.data)

@@ -54,19 +54,21 @@ const routes = [
     component: CreateReview
   },
   {
-    path: '/community/:review/ReviewDetail',
+    path: '/community/:reviewId/ReviewDetail',
     name: 'ReviewDetail',
     component: ReviewDetail,
     props: route => ({
       review: route.params.review,
+      reviewId: route.params.review,
     }),
   },
   {
-    path: '/community/:review/UpdateReview',
+    path: '/community/:reviewId/UpdateReview',
     name: 'UpdateReview',
     component: UpdateReview,
     props: route => ({
       review: route.params.review,
+      reviewId: route.params.review,
     }),
   },
 ]
