@@ -20,5 +20,5 @@ class Review(models.Model):
 class ReviewComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    comment = models.CharField(max_length=200)
+    content = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
