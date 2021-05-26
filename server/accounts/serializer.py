@@ -9,10 +9,10 @@ User = get_user_model()
 # password는 보여줘선 안되는 부분이므로 사용만 가능하게끔 (read는 불가)
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    # followData = serializers.DictField(child=serializers.CharField(), read_only=True)
+    
     # 팔로우 데이터를 얻기위해 커스텀 시리얼라이저 메소드로 가져오기
+    # followData = serializers.DictField(child=serializers.CharField(), read_only=True)
     followData = serializers.SerializerMethodField()
-
     def get_followData(self, obj):
         return { 'followerCnt': obj.followers.count(), 'followingCnt': obj.followings.count(), }
 

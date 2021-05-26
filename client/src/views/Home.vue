@@ -75,9 +75,10 @@ export default {
     },
   },
   mounted: function () {
-    this.$nextTick(function () {
-      this.$store.dispatch('getMovies')
-    })
+    this.$store.dispatch('getMovies')
+    console.log('getMovies_Home.vue')
+    // this.$nextTick(function () {
+    // })
   },
   computed: {
     ...mapState(['movies'])
