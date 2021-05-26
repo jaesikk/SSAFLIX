@@ -57,7 +57,7 @@ export default {
       // this.isLogin = true
       // console.log(this.$store.state.isLogin)
       // console.log(this.$store.state.accounts)
-      // axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
+      axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
     },
     onLogout: function () {
       localStorage.removeItem('jwt')

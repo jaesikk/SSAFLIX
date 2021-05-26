@@ -9,6 +9,7 @@ import CreateReview from '../views/community/CreateReview.vue'
 import UpdateReview from '../views/community/UpdateReview.vue'
 import ReviewDetail from '../views/community/ReviewDetail.vue'
 import Recommend from '../views/movies/Recommend.vue'
+import MovieDetail from '@/components/MovieDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -70,6 +71,16 @@ const routes = [
       review: route.params.review,
       reviewId: route.params.review,
     }),
+  },
+  {
+    path: '/movies/:movieId/',
+    name: 'MovieDetail',
+    component: MovieDetail,
+    // props: route => ({
+    //   movie: route.params.movie,
+    //   movieId: route.params.movie,
+    // }),
+    props: true,
   },
 ]
 

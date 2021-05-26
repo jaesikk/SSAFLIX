@@ -6,4 +6,5 @@ urlpatterns = [
     # ~/movies/
     path('', views.movies, name="movies"),
     path('<int:movie_pk>/', views.movie_detail, name="movie_detail"),
+    path('<int:movie_pk>/videos/', views.videos, name="videos"),
 ]
