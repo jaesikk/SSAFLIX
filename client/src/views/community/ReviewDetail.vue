@@ -3,16 +3,17 @@
     <h1>{{ review.title }}</h1>
     <router-link :to="{ name: 'Profile', params: {reviewUser: review.user, review: review}}">작성자 프로필로 이동</router-link>
     <!-- {{ review }} -->
-
-    <div>
-      <router-link :to="{ name: 'Community' }" class="d-flex justify-content-end ml-3">back</router-link>
-      <div v-if="check" class="d-flex justify-content-end ml-3">
-        <router-link :to="{ name: 'UpdateReview', params: {reviewId: review.id, review: review} }">수정</router-link> |
-        <button @click="delReview(review)">삭제</button>
-      </div>
-    </div>
-    <hr>
+    
+    <div class="d-flex justify-content-between">
         <button @click="onLiked" >{{ isLike ? '좋아요 취소' : '좋아요'}} </button>
+        <div>
+        <router-link :to="{ name: 'Community' }">back</router-link>
+          <div v-if="check">
+            <router-link :to="{ name: 'UpdateReview', params: {reviewId: review.id, review: review} }">수정</router-link> |
+            <button @click="delReview(review)">삭제</button>
+          </div>
+        </div>
+    </div>
     <hr>
     <p>{{ review.id }}</p>
     <h2>{{ review.movie_title }} 후기</h2>

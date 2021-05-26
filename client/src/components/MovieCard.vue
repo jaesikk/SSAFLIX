@@ -1,7 +1,7 @@
 <template>
   <div class="gui-card">
     <div class="gui-card__media">
-      <img class="gui-card__img" :src="poster" alt=""/>
+      <img @click="selectMovie" class="gui-card__img" :src="poster" alt=""/>
     </div>
     <div class="gui-card__details">
       <div class="gui-card__title">
@@ -28,10 +28,10 @@ export default {
     }
   },
   methods: {
-    // Movie: function () {
-    //   this.$emit('onClick', this.movie)
-    //   console.log(this.movie)
-    // }
+    selectMovie: function () {
+      this.$emit('selectmovie', this.movie)
+      console.log('select!!@!!')
+    }
   }
 }
 

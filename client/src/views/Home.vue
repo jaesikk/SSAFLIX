@@ -1,7 +1,6 @@
 <template>
 <div class="container">
   <h1>상영</h1>
-
   <div class="home slider">
     <div class="container">
 
@@ -13,7 +12,12 @@
           
           <!-- Button trigger modal -->
           <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-            <MovieCard v-for="movie in movies" :key="movie.pk" :movie='movie'/>
+            <MovieCard 
+              v-for="movie in movies"
+              :key="movie.pk"
+              :movie='movie'
+              @selectmovie="onSelect"
+            />
           </button>
 
         </div>
@@ -27,11 +31,11 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="staticBackdropLabel"><li v-for="movie in movies" :key="movie.pk">{{movie.title}}</li></h5>
+            <h5 class="modal-title" id="staticBackdropLabel">영화제목</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p>안녕하세요%%%%%%%</p>
+            <p>%%%%OVERVIEW%%%</p>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -60,14 +64,15 @@ export default {
   },
   data: function () {
     return {
-      movie: '',
+      selectMovie: '',
     }
   },
-  method: {
-    // onClick: function (movie) {
-    //   this.movie = movie
-    //   console.log('here')
-    // }
+  methods: {
+    onSelect: function (movie) {
+      this.selectMovie = movie
+      console.log(this.selectMovie)
+      console.log('onSelect@@!@@')
+    },
   },
   mounted: function () {
     this.$nextTick(function () {

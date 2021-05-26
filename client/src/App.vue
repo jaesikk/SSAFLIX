@@ -17,8 +17,10 @@
         </div>
       </nav>
     </div>
+    <!-- <MovieCard @select-movie="onMovieSelect"/> -->
     <router-view @login="onLogin" :isLogin="isLogin"/>
     <!-- 로그인  -->
+    
   </div>
 </template>
 
@@ -26,23 +28,30 @@
 <script>
 import axios from 'axios'
 import { mapState } from 'vuex'
+
 export default {
   name: 'App',
+
   data: function () {
     return {
-      isLogin: false,
+      // isLogin: false,
+      selectMovie: '',
     }
   },
   methods: {
+    // onMovieSelect: function (movie){
+    //   console.log('app-movie')
+    //   this.selectMovie = movie
+    // },
     onLogin: function () {
-      this.isLogin = true
+      // this.isLogin = true
       // console.log(this.$store.state.isLogin)
       // console.log(this.$store.state.accounts)
       // axios.defaults.headers.common['Authorization'] = `JWT ${localStorage.getItem('jwt')}`
     },
     onLogout: function () {
       localStorage.removeItem('jwt')
-      this.isLogin = false
+      // this.isLogin = false
       this.$store.dispatch('logoutUser')
       axios.defaults.headers.common['Authorization'] = ''
       console.log(axios.defaults.headers.common['Authorization'])

@@ -17,7 +17,8 @@
     <!-- Home.vue에 쓰일 css -->
     <link rel="stylesheet" href="./style.css">
     <script src="./index.js"></script>
-
+    <!-- fontawesome -->
+    <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
     <title><%= htmlWebpackPlugin.options.title %></title>
 
     <style>
@@ -28,7 +29,9 @@
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div class="container">
+      <div id="app"></div>
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
