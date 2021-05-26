@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <div class="container">
     <h1>{{ user.username }}'s Profile</h1>
     <!-- {{ review }} -->
-    <div>
+    <div class="d-flex justify-content-between">
+      <button class="btn btn-danger" @click="onFollow"><i class= "fa-heart" :class="[ isFollow ? 'fas': 'far']"></i></button>
       <span>팔로우: {{ user.followData.followingCnt }} | 팔로워: {{ user.followData.followerCnt }}</span>
-      <button @click="onFollow" >{{ isFollow ? '팔로우 취소' : '팔로우' }} </button>
     </div>
-    <button @click="getUser">정보가져오기</button>
+    <hr>
+    <!-- <button @click="getUser">정보가져오기</button> -->
   </div>
 </template>
 
@@ -24,7 +25,7 @@ export default {
   data: function () {
     return {
       nowReview: this.review,
-      isFollow: false,
+      isFollow: '',
       user: [],
     }
   },
@@ -39,6 +40,8 @@ export default {
       }).then((res) => {
         console.log(res.data)
         this.isFollow = res.data.isFollow
+        // 팔로우 데이터를 보내고 getUser를 통해 갱신시켜 팔로우, 팔로워 수를 갱신
+        this.getUser()
       }).catch((err) => {
         console.log(err.response)
         alert(err.response.data.error)
@@ -57,8 +60,9 @@ export default {
       })
     },
   },
-  created: function () {
+  mounted: function () {
     this.getUser()
+    console.log(this.getUser)
   },
 }
 </script>

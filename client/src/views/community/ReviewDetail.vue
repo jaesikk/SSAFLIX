@@ -1,37 +1,47 @@
 <template>
-  <div>
+  <div class="container">
     <h1>{{ review.title }}</h1>
-    <router-link :to="{ name: 'Profile', params: {reviewUser: review.user, review: review}}">작성자 프로필로 이동</router-link>
-    <!-- {{ review }} -->
-    
+    <router-link :to="{ name: 'Profile', params: {reviewUser: review.user, review: review}}" class="btn btn-link d-flex justify-content-end ml-3">go profile</router-link>
+
     <div class="d-flex justify-content-between">
-        <button @click="onLiked" >{{ isLike ? '좋아요 취소' : '좋아요'}} </button>
+        <button class="btn btn-primary" @click="onLiked" ><i class="fa-thumbs-up" :class="[ isLike ? 'fas' : 'far']"></i> </button>
         <div>
-        <router-link :to="{ name: 'Community' }">back</router-link>
-          <div v-if="check">
-            <router-link :to="{ name: 'UpdateReview', params: {reviewId: review.id, review: review} }">수정</router-link> |
-            <button @click="delReview(review)">삭제</button>
+        <router-link :to="{ name: 'Community' }" class="btn btn-link">back</router-link>
+          <div v-if="checkReviewId">
+            <router-link :to="{ name: 'UpdateReview', params: {reviewId: review.id, review: review} }"><button class="btn btn-sm btn-outline-info">수정</button></router-link> |
+            <button class="btn btn-sm btn-outline-info" @click="delReview(review)">삭제</button>
           </div>
         </div>
     </div>
     <hr>
-    <p>{{ review.id }}</p>
-    <h2>{{ review.movie_title }} 후기</h2>
-      <p>평점: {{ review.rank }}</p>
-      <p>글 내용: {{ review.content }}</p>
+    <!-- <p>{{ review.id }}</p> -->
+      <h2>영화: {{ review.movie_title }}</h2>
+      <div id="content">
+        <ul id="review">
+          <p>평점: {{ review.rank }}</p>
+          <p>글 내용: {{ review.content }}</p>
+        </ul>
+      </div>
     <!-- <button @click="checkId">CHECKID버튼</button> -->
     <hr>
     <div>
       <CommentForm @getComments="getComments" :review="review"/>
       <!-- commetn.id를 키값으로 v-for문 comment 접근 -->
+      <br>
       <ul>
-        <li v-for="comment in comments" :key="comment.id">
-          {{ comment.content }}
-          <button @click="delComment(comment)">X</button>
+        <li v-for="(comment, idx) in comments" :key="comment.id" class="row">
+          <span class="col text-muted" >익명{{ comment.user }} |</span>
+          <span class="col">{{ comment.content }}</span>
+          <span class="col text-muted ">
+            | {{ comment.created_at }} 
+            <!-- comment.user와 accounts.userId를 통해 체크하는데 이슈가 있음 -->
+            <button @click="checkComment(comment, idx)">check</button>
+            <button v-if="checkCommentUser" class="btn btn-sm btn-outline-light" @click="delComment(comment)">X</button>
+          </span>
+          <hr>
         </li>
       </ul>
     </div>
-    <hr>
   </div>
 </template>
 
@@ -55,7 +65,8 @@ export default {
       isLike: '',
       nowReview: this.review,
       isFollow: '',
-      check: false,
+      checkReviewId: false,
+      checkCommentUser: false,
     }
   },
   computed: {
@@ -96,7 +107,6 @@ export default {
         url: SERVER_URL + `/community/${this.review.id}/comments/${comment.id}/`,
       })
       .then((res) => {
-        console.log('get')
         this.getComments()
         console.log(res)
       })
@@ -118,12 +128,25 @@ export default {
         alert(err.response.data.error)
       })
     },
+    // accounts.userId와 review.user 같을때만 수정, 삭제기능을 활성화
     checkId: function () {
       if (this.$store.state.accounts.userId === this.review.user) {
-        this.check = true
+        this.checkReviewId = true
       }
       else {
-        this.check = false
+        this.checkReviewId = false
+      }
+    },
+    checkComment: function (comment, idx) {
+      console.log(this.comments[idx].user)
+      console.log(comment.user)
+      if (this.$store.state.accounts.userId === comment.user) {
+        this.checkCommentUser = true
+        console.log('true')
+      }
+      else {
+        this.checkCommentUser = false
+        console.log('fail')
       }
     },
   },
@@ -131,10 +154,29 @@ export default {
   mounted: function () {
     this.getComments()
     this.checkId()
+    // axios ({
+    //     method: 'GET',
+    //     url: SERVER_URL + `/community/${this.review.id}/`,
+    //     data: this.review,
+    //   }).then((res) => {
+    //     console.log(res.data)
+    //     this.isLike = res.data.isLike
+    //     // this.getReviews()
+    //   }).catch((err) => {
+    //     console.log(err.response)
+    //     alert(err.response.data.error)
+    //   })
   }
 }
 </script>
 
 <style>
+#content {
+  height: 300px;
+  left: 10%;
+}
 
+#review {
+  left: 100px;
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="text" v-model="comment" placeholder="댓글을 입력하세요." @keyup.enter="createComment">
+    <input id="comment-input" type="text" v-model="comment" placeholder="댓글을 입력하세요." @keyup.enter="createComment">
   </div>
 </template>
 
@@ -30,6 +30,7 @@ export default {
       }).then((res) => {
         this.$emit('getComments')
         console.log(res)
+        this.comment= ''
       }).catch((err) => {
         console.log(err.response)
       })
@@ -39,5 +40,8 @@ export default {
 </script>
 
 <style>
+#comment-input {
+  width: 40%;
+}
 
 </style>

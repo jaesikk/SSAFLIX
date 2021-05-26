@@ -1,22 +1,25 @@
 <template>
-  <div>
+  <div class="container">
     <h1>UPDATE</h1>
+    <hr>
       <router-link :to="{ name: 'ReviewDetail', params: {reviewId: review.id, review: review} }" class="navbar-brand d-flex justify-content-end ml-3">back</router-link>
-      {{ review.title }}
-        <div class="text-muted">
-
-          <div>
-            <input type="text" v-model.trim="review.title"> | 
+        <div id="input">
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">글 제목</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.title">
           </div>
-          <div>
-            <input type="text" v-model.trim="review.movie_title"> | 
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">영화 제목</span>
+            <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.movie_title">
           </div>
-          <div>
-            <input type="text" v-model.trim="review.content"> | 
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">글 내용</span>
+            <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="height: 180px" v-model.trim="review.content"></textarea>
           </div>
-          <div>
-            <input type="number" v-model.trim="review.rank"> | 
-          </div> 
+          <div class="input-group input-group-sm mb-3">
+            <span class="input-group-text" id="inputGroup-sizing-sm">평점</span>
+            <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.rank">
+          </div>
           <button @click="updateReview">생성</button>
         </div>
     </div>
@@ -50,16 +53,16 @@ export default {
       }).then((res) => {
         console.log(res.data)
         this.nowReview = res.data
-        this.$router.push({ name: 'ReviewDetail' })
+        this.$router.push({ name: 'Community' })
       }).catch((err) => {
         console.log(err.response)
         alert(err.response.data.error)
       })
     },
-  }
+  },
 }
 </script>
 
 <style>
-
+/*  */
 </style>
