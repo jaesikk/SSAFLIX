@@ -3,7 +3,7 @@
   <h1>상영</h1>
   <div class="home slider">
     <div class="container">
-
+      
     <span onmouseover="scrollEsquerda()" onmouseout="clearScroll()" class="handle handlePrev active">
       <i class="fa fa-caret-left" aria-hidden="true"></i>
     </span>
@@ -15,7 +15,7 @@
           <button type="button" class="btn btn-dark">
           <!-- <router-link :to="{ name: 'MovieDetail' }" , params: {selectMovieId: selectMovie.id, selectMovie: selectMovie}, tag="a"> -->
             <MovieCard 
-              v-for="movie in movies"
+              v-for="movie in popularMovies"
               :key="movie.pk"
               :movie='movie'
               @selectmovie="onSelect"
@@ -74,6 +74,7 @@ import MovieCard from '@/components/MovieCard.vue'
 import { mapState } from 'vuex'
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
+// const movieStore = 'movieStore'
 
 export default {
   name: 'Home',
@@ -83,8 +84,8 @@ export default {
   data: function () {
     return {
       selectMovie: '',
-      videoList: [],
-      videoURI: '',
+      // videoList: [],
+      // videoURI: '',
     }
   },
   methods: {
@@ -105,13 +106,13 @@ export default {
     },
   },
   mounted: function () {
-    this.$store.dispatch('getMovies')
+    this.$store.dispatch('movieStore/getMovies', 'popular')
     console.log('getMovies_Home.vue')
     // this.$nextTick(function () {
     // })
   },
   computed: {
-    ...mapState(['movies'])
+    ...mapState('movieStore', ['popularMovies'])
   },
 }
 </script>

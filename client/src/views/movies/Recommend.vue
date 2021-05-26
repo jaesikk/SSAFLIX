@@ -43,7 +43,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(['movies'])
+    ...mapState('movieStore', ['popularMovies'])
   }
 }
 </script>
