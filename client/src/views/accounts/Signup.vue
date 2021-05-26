@@ -1,39 +1,45 @@
 <template>
-  <div class="w-50">
-    <h1>회원가입</h1>
-    <div class="mb-3">
-      <label for="username" class="form-label">Username</label>
-      <input
-        type="text"
-        class="form-control"
-        id="username"
-        v-model="credentials.username"
-        @input="changedid"
-      >
-      <button class="btn btn-outline-primary" @click="id_check">중복확인</button>
-      <div id="emailHelp" class="form-text">We'll never share your information with anyone else.</div>
-    </div>
+  <div id="back">
+    <img id="img" src="https://an2-img.amz.wtchn.net/image/v2/27a141759f10a71e73a27ecef9ac4634.jpg?jwt=ZXlKaGJHY2lPaUpJVXpJMU5pSjkuZXlKaVlXTnJaM0p2ZFc1a0lqcDdJbklpT2pJMU5Td2laeUk2TWpVMUxDSmlJam95TlRWOUxDSndZWFJvSWpvaUwzWXlMM04wYjNKbEwybHRZV2RsTHpFMk1EZzNNVFkzTVRNMU1EVTFORGN5TURraWZRLjlINVo2cDFMOVpCTUM1R2huT010TmVraldTRzk1YnBfTkk4U3lzQXRmREE" alt="">
 
-    <div class="mb-3">
-      <label for="password" class="form-label">Password</label>
-      <input
-        type="password"
-        class="form-control"
-        id="password"
-        v-model="credentials.password"
-      >
+    <div id="signup">
+      <h1>회원가입</h1>
+      <hr>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          v-model="credentials.username"
+          @input="changedid"
+        >
+        <button class="btn btn-sm btn-outline-primary m-1" @click="id_check">중복확인</button>
+        <div id="emailHelp" class="form-text mb-5">We'll never share your information with anyone else.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          v-model="credentials.password"
+        >
+      </div>
+      <div class="mb-3">
+        <label for="passwordConfirmation" class="form-label">Password confirm</label>
+        <input
+          type="password"
+          class="form-control"
+          id="passwordConfirmation"
+          v-model="credentials.passwordConfirmation"
+        >
+      </div>
+      <button type="button" class="btn btn-outline-primary" @click="signup">회원가입</button>
     </div>
-    <div class="mb-3">
-      <label for="passwordConfirmation" class="form-label">Password confirm</label>
-      <input
-        type="password"
-        class="form-control"
-        id="passwordConfirmation"
-        v-model="credentials.passwordConfirmation"
-      >
-    </div>
-    <button type="button" class="btn btn-outline-primary" @click="signup">회원가입</button>
   </div>
+
 </template>
 
 <script>
@@ -107,5 +113,10 @@ export default {
 </script>
 
 <style>
-
+#signup {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>

@@ -1,22 +1,30 @@
 <template>
-  <div>
+  <div class="container">
   <h1> Create </h1>
+  <hr>
     <router-link :to="{ name: 'Community' }" class="d-flex justify-content-end ml-3">back</router-link>
 
-    <div class="text-muted">
-
-      <div>
-        <input type="text" placeholder="글 제목" v-model.trim="review.title"> | 
+    <div id="input">
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">글 제목</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.title">
       </div>
-      <div>
-        <input type="text" placeholder="영화 제목" v-model.trim="review.movie_title"> | 
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">영화 제목</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.movie_title">
       </div>
-      <div>
-        <input type="text" placeholder="글 내용" v-model.trim="review.content"> | 
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">글 내용</span>
+        <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="height: 180px" v-model.trim="review.content"></textarea>
       </div>
-      <div>
-        <input type="number" placeholder="5" v-model.trim="review.rank"> | 
-      </div> 
+      <!-- <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">글 내용</span>
+        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.content">
+      </div> -->
+      <div class="input-group input-group-sm mb-3">
+        <span class="input-group-text" id="inputGroup-sizing-sm">평점</span>
+        <input type="number" class="form-control" placeholderaria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.rank">
+      </div>
       <button @click="createReview">생성</button>
     </div>
   </div>
@@ -78,5 +86,10 @@ export default {
 </script>
 
 <style>
-
+#input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 </style>

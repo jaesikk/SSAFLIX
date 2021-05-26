@@ -1,23 +1,38 @@
 <template>
   <div id="app">
     <div id="nav">
-       <!-- nav bar -->
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-2">
-        <div class="container">
-          <router-link to="/" class="navbar-brand">Home</router-link> |
-          <router-link :to="{ name: 'Recommend' }" class="navbar-brand">Recommend</router-link> |
-          <router-link :to="{ name: 'Community' }" class="navbar-brand">Community</router-link> |
-          <span v-if="isLogin">
-           <router-link to="#" @click.native="onLogout" class="navbar-brand">Logout</router-link>
-          </span>
-          <span v-else>
-            <router-link :to="{ name: 'Login' }" class="navbar-brand">Login</router-link> |
-            <router-link :to="{ name: 'Signup' }" class="navbar-brand">Signup</router-link>
-          </span>
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark p-2">
+        <div class="container-fluid">
+          <router-link to="/" class="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="NETFLIX" style= "width:120px"></router-link>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <router-link to="/" class="nav-link">Home</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{ name: 'Recommend' }" class="nav-link">Recommend</router-link>
+              </li>
+              <li class="nav-item">
+                <router-link :to="{ name: 'Community' }" class="nav-link">Community</router-link>
+              </li>
+            </ul>
+
+            <div class="d-flex">
+              <span v-if="isLogin">
+                <router-link to="#" @click.native="onLogout" class="nav-link">Logout</router-link>
+              </span>
+              <span v-else>
+                <router-link :to="{ name: 'Login' }" class="nav-link">Login</router-link> 
+                <!-- <router-link :to="{ name: 'Signup' }" class="nav-link">Signup</router-link> -->
+              </span>
+            </div>
+          </div>
         </div>
       </nav>
     </div>
-    <!-- <MovieCard @select-movie="onMovieSelect"/> -->
     <router-view @login="onLogin" :isLogin="isLogin"/>
     <!-- 로그인  -->
     
@@ -35,14 +50,9 @@ export default {
   data: function () {
     return {
       // isLogin: false,
-      selectMovie: '',
     }
   },
   methods: {
-    // onMovieSelect: function (movie){
-    //   console.log('app-movie')
-    //   this.selectMovie = movie
-    // },
     onLogin: function () {
       // this.isLogin = true
       // console.log(this.$store.state.isLogin)
@@ -78,11 +88,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ced1d4a9;
+  color: #ffffffea;
 }
 
 #nav {
-  padding: 30px;
+  padding: 0px 50px;
+  margin-bottom: 50px;
 }
 
 #nav a {
