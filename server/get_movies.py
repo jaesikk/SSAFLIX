@@ -27,7 +27,7 @@ def get_movie_data(url_string, range_cnt, save_movieList_name, save_videoList_na
                 video = {
                     'model': 'movies.video',
                     'fields': {
-                        'movie': res_json.get('id'),
+                        'tmdb_id': res_json.get('id'),
                         'name': res_data.get('name'),
                         'key': res_data.get('key'),
                         'site': res_data.get('site'),

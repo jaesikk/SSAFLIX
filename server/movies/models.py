@@ -15,11 +15,13 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     overview = models.TextField()
     poster_path = models.CharField(max_length=200)
-    tmdb_id = models.IntegerField(unique=True, default=uuid.uuid4)
+    # tmdb_id = models.IntegerField(unique=True, default=uuid.uuid4)
+    tmdb_id = models.IntegerField()
     # genres = models.ManyToManyField(Genre)
     
 class Video(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, to_field='tmdb_id')
+    # movie = models.ForeignKey(Movie, on_delete=models.CASCADE, to_field='tmdb_id', db_column='movie_tmdb_id')
+    tmdb_id = models.IntegerField()
     name = models.CharField(max_length=100)
     key = models.CharField(max_length=200)
     site = models.CharField(max_length=50)
