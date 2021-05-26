@@ -2,8 +2,8 @@
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Movie
-from .serializer import MovieSerializer
+from .models import Movie, Video
+from .serializer import MovieSerializer, VideoSerializer
 # Create your views here.
 
 from rest_framework.decorators import permission_classes, authentication_classes
@@ -27,4 +27,15 @@ def movies(request):
 def movie_detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieSerializer(movie)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+# 인증 여부 판단
+@authentication_classes([JSONWebTokenAuthentication])
+# 인증 확인 되었을 때만 권한 부여
+@permission_classes([IsAuthenticated])
+def videos(request, movie_pk):
+    movie = get_object_or_404(Movie, pk=movie_pk)
+    video_list = get_list_or_404(Video, tmdb_id=movie.tmdb_id)
+    serializer = VideoSerializer(video_list, many=True)
     return Response(serializer.data)
