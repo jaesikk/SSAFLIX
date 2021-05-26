@@ -3,7 +3,7 @@
     {{movie}}
 
     <h2>동영상</h2>
-    <div v-show="isFoundVideo" id="carouselExampleControls" class="px-wide-600 carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+    <div v-show="isFoundVideo" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
       <div class="carousel-inner">
         <VideoListItem v-for="(video, index) in videoList" :key="video.key" :video="video" :index="index" @foundVideo="onFoundVideo" />
         <!-- <div class="carousel-item active">
@@ -25,7 +25,7 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="video-container">
+    <!-- <div class="video-container">
       <iframe 
         id="ytplayer" 
         type="text/html"
@@ -33,7 +33,7 @@
         :src="videoURI"
         frameborder="0">
       </iframe>
-    </div>
+    </div> -->
   </div>
 </template>
 

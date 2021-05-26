@@ -1,8 +1,35 @@
 <template>
-  <div class="carousel-item" :class="{ 'active': index === 0}">
-    <!-- :alt="videoData.snippet.title" -->
-    <img class="d-block w-100" :src="thumbnail" alt="videoTitle">
-  </div>
+
+    <div class="carousel-item" :class="{'active': index === 0}">
+      <!-- Button trigger modal -->
+      <!-- :alt="videoData.snippet.title" -->
+      <button type="button" class="border-0 p-0" data-bs-toggle="modal" data-bs-target="#videoModal">
+        <img class="d-block w-100" :src="thumbnail" alt="videoTitle">
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="videoModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">{{ videoData[0].snippet.title }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="video-container">
+                <iframe 
+                  id="ytplayer" 
+                  type="text/html"
+                  :src="videoURI"
+                  frameborder="0">
+                </iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+
 </template>
 
 <script>
@@ -21,7 +48,7 @@ export default {
   data: function() {
     return {
       videoData: [],
-      videoURI: `https://www.youtube.com/embed/${this.video.key}`,
+      videoURI: '',
       thumbnail: '',
     }
   },
@@ -47,6 +74,7 @@ export default {
         console.log('complete')
         this.videoData = res.data.items
         this.thumbnail = this.videoData[0].snippet.thumbnails.high.url
+        this.videoURI = `https://www.youtube.com/embed/${this.video.key}`
         // console.log(this.videoData)
         // console.log(this.thumbnail)
         this.$emit('foundVideo')
@@ -54,10 +82,30 @@ export default {
     }).catch((err) => {
       console.log(err.response)
     })
+  },
+  methods: {
+    stopVideo: function () {
+      // const st = document.getElementById('ytplayer-'+this.index)
+      // st.setAttribute('src', this.videoURI)
+    }
   }
 }
 </script>
 
 <style>
-
+/* iframe을 container를 기준으로 위치를 지정 */
+/* 유튜브 비디오 비율을 맞추기 위한 높이 설정 */
+.video-container {
+  position: relative;   
+  padding-top: 56.25%;  
+}
+/* container를 기준으로 위치를 지정*/
+/* container의 가장 위쪽으로 위치를 지정 */
+.video-container > iframe {
+  position: absolute;   
+  top: 0;               
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
 </style>
