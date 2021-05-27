@@ -119,7 +119,7 @@ export default {
     }).then((res) => {
       console.log(res)
       this.images = res.data
-      this.backdropPath = "https://image.tmdb.org/t/p/original/" + String(this.images.backdrops[0].file_path),
+      this.backdropPath = "https://image.tmdb.org/t/p/original/" + String(this.images.backdrops[0].file_path)
       console.log(this.images.backdrops[0].file_path)
     }).catch((err) => {
       console.log(err.response)
@@ -154,13 +154,14 @@ export default {
   display: flex;
   overflow: hidden;
   opacity: 0.5;
+  z-index: -1;
   /* width: 100%; */
   /* background-image: linear-gradient(); */
   
 }
 #movieposter {
-  margin-bottom: 0px 50px;
+  /* margin-bottom: 0px 50px; */
   box-shadow: 10px 10px 10px rgba(219, 214, 214, 0.7);
-  margin: 50px 50px;
+  margin: 50px 0px;
 }
 </style>

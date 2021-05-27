@@ -1,14 +1,32 @@
 <template>
-  <div id="reviewlist" class="container fs-3">
-    <!-- <img id="img" src="https://p4.wallpaperbetter.com/wallpaper/379/361/318/movie-the-intern-anne-hathaway-wallpaper-preview.jpg" alt=""> -->
-
+  <div id="commu-list" class="container fs-3">
+    <img id="board" src="https://svg-clipart.com/svg/white/DabY6u8-chalk-board-vector.svg" alt="">
+    <!-- {{ reviews }} -->
     <h1>Community</h1>
-    <router-link :to="{ name: 'CreateReview' }" class="navbar-brand d-flex justify-content-end ml-3">게시글 생성</router-link>
+    <router-link :to="{ name: 'CreateReview' }" class="navbar-brand d-flex justify-content-end p-5">게시글 생성</router-link>
     <ol>
       <li v-for="review in reviews" :key="review.id" :review="review">
-        <router-link
-        :to="{ name: 'ReviewDetail', params: {reviewId: review.id, review: review} }"
-          class="navbar-brand">{{ review.title }}</router-link> <hr> 
+        <!-- {{ review }} -->
+        <div id="review-list" class="container">
+          <div class="row">
+            <div class="col">
+              {{ review.movie_title}}
+            </div>
+            <div class="col">
+              <router-link
+                :to="{ name: 'ReviewDetail',
+                    params: {reviewId: review.id, review: review}
+                  }"
+                class="navbar-brand">
+                {{ review.title }}
+              </router-link>
+            </div>
+            <div class="col">
+              <p class="text-muted fs-6">{{ review.created_at }}</p>
+            </div>
+          </div>
+        </div>
+        <hr> 
       </li>
     </ol>
     <!-- <CommunityDetail v-for="review in reviews" :key="review.id" :review="review" /> -->
@@ -69,9 +87,21 @@ export default {
 </script>
 
 <style>
-#reviewlist {
+#commu-list {
   display: inline-block;
+  margin-top: 30px;
   width: 50%;
   text-align: center;
+}
+
+#board {
+  opacity: 0.5;
+  position: fixed;
+  width: 60%;
+  top: 5%;
+  bottom: 0px;
+  left: 20%;
+  right: 0px;
+  z-index: -1;
 }
 </style>

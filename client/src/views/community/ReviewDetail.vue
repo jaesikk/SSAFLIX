@@ -15,6 +15,10 @@
     </div>
     <hr>
     <!-- <p>{{ review.id }}</p> -->
+      <div id="date">
+        <p>작성일: {{ review.created_at }}</p>
+        <p>수정일: {{ review.updated_at }}</p>
+      </div>
       <h2>영화: {{ review.movie_title }}</h2>
       <div id="content">
         <ul id="review">
@@ -29,14 +33,14 @@
       <!-- commetn.id를 키값으로 v-for문 comment 접근 -->
       <br>
       <ul>
-        <li v-for="(comment, idx) in comments" :key="comment.id" class="row">
+        <li v-for="(comment) in comments" :key="comment.id" class="row">
           <span class="col text-muted" >{{ comment.username }} |</span>
           <span class="col">{{ comment.content }}</span>
           <span class="col text-muted ">
             | {{ comment.created_at }} 
             <!-- comment.user와 accounts.userId를 통해 체크하는데 이슈가 있음 -->
-            <button @click="checkComment(comment, idx)">check</button>
-            <button v-if="checkCommentUser" class="btn btn-sm btn-outline-light" @click="delComment(comment)">X</button>
+            <!-- <button @click="checkComment(comment, idx)">check</button> -->
+            <button class="btn btn-sm btn-outline-light" @click="delComment(comment)">X</button>
           </span>
           <hr>
         </li>
@@ -66,7 +70,7 @@ export default {
       nowReview: this.review,
       isFollow: '',
       checkReviewId: false,
-      checkCommentUser: false,
+      // checkCommentUser: false,
     }
   },
   computed: {
@@ -132,23 +136,25 @@ export default {
     checkId: function () {
       if (this.accounts.userId === this.review.user) {
         this.checkReviewId = true
+        console.log('checkId')
       }
       else {
         this.checkReviewId = false
+        console.log('checkIdfail')
       }
     },
-    checkComment: function (comment, idx) {
-      console.log(this.comments[idx].user)
-      console.log(comment.user)
-      if (this.accounts.userId === comment.user) {
-        this.checkCommentUser = true
-        console.log('true')
-      }
-      else {
-        this.checkCommentUser = false
-        console.log('fail')
-      }
-    },
+    // checkComment: function (comment, idx) {
+    //   console.log(this.comments[idx].user)
+    //   console.log(comment.user)
+    //   if (this.accounts.userId === comment.user) {
+    //     this.checkCommentUser = true
+    //     console.log('true')
+    //   }
+    //   else {
+    //     this.checkCommentUser = false
+    //     console.log('fail')
+    //   }
+    // },
   },
   // 댓글과 ID체크 바로 호출
   mounted: function () {
@@ -177,5 +183,12 @@ export default {
 
 #review {
   left: 100px;
+}
+
+#date {
+  display: inline-block;
+  width: 30%;
+  text-align: end;
+
 }
 </style>

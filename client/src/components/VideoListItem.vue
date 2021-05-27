@@ -4,7 +4,7 @@
       <!-- Button trigger modal -->
       <!-- :alt="videoData.snippet.title" -->
       <button type="button" class="border-0 p-0" data-bs-toggle="modal" :data-bs-target="'#videoModal'+this.index">
-        <img class="d-block w-100" :src="thumbnail" alt="videoTitle">
+        <img class="d-block w-100 rounded" :src="thumbnail" alt="videoTitle">
       </button>
       <!-- Modal -->
       <div class="modal fade" :id="'videoModal'+this.index" data-bs-backdrop="static" tabindex="-1" :aria-labelled-by="'videoModalLabel'+this.index" aria-hidden="true">
