@@ -14,41 +14,35 @@
         </div>
         <div class="col">
           <div id="info" >
-            <p>개봉일 : {{movie.release_date}}</p>
-            <p>평점 : {{movie.vote_average}}</p>
+            <h4>개봉일 : {{movie.release_date}}</h4>
+            <h4>평점 : {{movie.vote_average}}</h4>
           </div>
         <hr>
-          <p>줄거리</p>
+          <h3>줄거리</h3>
           <br>
           <p class="fs-5"> {{movie.overview}} </p>
+        <hr>
+
+        <h3>트레일러</h3>
+        <br>
+          <div v-show="isFoundVideo" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+            <div class="carousel-inner">
+              <VideoListItem v-for="(video, index) in videoList" :key="video.key" :video="video" :index="index" @foundVideo="onFoundVideo" />
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
     <hr>
 
-    <h2>트레일러</h2>
-      <div v-show="isFoundVideo" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-        <div class="carousel-inner">
-          <VideoListItem v-for="(video, index) in videoList" :key="video.key" :video="video" :index="index" @foundVideo="onFoundVideo" />
-          <!-- <div class="carousel-item active">
-            <img src="" class="d-block w-100" alt="...">
-          </div> -->
-          <!-- <div class="carousel-item">
-            <img src="" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="" class="d-block w-100" alt="...">
-          </div> -->
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
     </div>
     <!-- <div class="video-container">
       <iframe 

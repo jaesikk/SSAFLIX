@@ -15,16 +15,16 @@
     </div>
     <hr>
     <!-- <p>{{ review.id }}</p> -->
-      <div id="date">
-        <p>작성일: {{ review.created_at }}</p>
-        <p>수정일: {{ review.updated_at }}</p>
-      </div>
       <h2>영화: {{ review.movie_title }}</h2>
-      <div id="content">
+      <div id="content" class="container" >
         <ul id="review">
           <p>평점: {{ review.rank }}</p>
           <p>글 내용: {{ review.content }}</p>
         </ul>
+      </div>
+      <div id="date" class="fs-6">
+        <p>작성일: {{ review.created_at }}</p>
+        <p>수정일: {{ review.updated_at }}</p>
       </div>
     <!-- <button @click="checkId">CHECKID버튼</button> -->
     <hr>
@@ -182,13 +182,13 @@ export default {
 }
 
 #review {
-  left: 100px;
+  text-align: left;
+  margin: 5% 10%;
 }
 
 #date {
-  display: inline-block;
-  width: 30%;
-  text-align: end;
+  /* display: inline-block; */
+  text-align: right;
 
 }
 </style>
