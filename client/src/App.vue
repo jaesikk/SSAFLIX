@@ -25,9 +25,9 @@
                 {{isDark ? 'White Mode' : 'Dark Mode'}}  
               </button>
               <!-- <p>{{ Number(accounts.userId) }}</p> -->
-              <span v-if="isLogin">
-                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3">{{ accounts.username }}</router-link>
-                <router-link to="#" @click.native="onLogout" class="nav-link">Logout</router-link>
+              <span id="nav-login" v-if="isLogin">
+                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3 text-decoration-none">{{ accounts.username }}</router-link>
+                <router-link to="#" @click.native="onLogout" class="nav-link text-decoration-none">Logout</router-link>
               </span>
               <span v-else>
                 <router-link :to="{ name: 'Login' }" class="nav-link text-decoration-none">Login</router-link> 
