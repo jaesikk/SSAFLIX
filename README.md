@@ -110,11 +110,6 @@ with open('movies.json', 'w', encoding='utf-8') as f:
 
 
 
-- 
-- 
-
-
-
 
 
 ## 210524
@@ -151,4 +146,19 @@ with open('movies.json', 'w', encoding='utf-8') as f:
 
 ## 210526
 
-- movie
+- 영화 상세 페이지 작성
+- 영화 상세 페이지에서 동영상 기능 추가 (carousel) 
+  - 문제가 많음
+- vuex store를 userStore, movieStore로 모듈화
+  - 문제가 많이 발생;
+  - mapState 사용시 ...mapState(store_name, ['store_state_name']) 으로 사용해야함 혹시 중복된 state이름이 나오면 어떻게 될지는 모르겠음
+  - dispatch 사용시 $store.dispatch('store_name/action_name', parameter) 로 사용
+  - commit 하는 부분에 데이터를 2개 이상 보내려면 payload로 보내야됨 (commit_name, {data1: data, data2: data}) 이런식으로 사용할 때도 payload.data1, payload.data2 이런식으로 접근해서 사용
+
+
+
+## 210527
+
+- 프로젝트 마무리
+  - 포인트 제도 추가
+  - 

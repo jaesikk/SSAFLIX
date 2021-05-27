@@ -6,6 +6,9 @@ from .models import Review, ReviewComment
 
 class ReviewCommentSerializer(serializers.ModelSerializer):
 
+    # 댓글 포인트도 같이 넘기도록함 (갱신) 
+    point = serializers.IntegerField(source='user.point', read_only=True)
+    
     class Meta:
         model = ReviewComment
         fields = '__all__'
@@ -18,6 +21,9 @@ class ReviewCommentSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
 
     reviewcomment_set = ReviewCommentSerializer(read_only=True, many=True)
+    # 댓글 포인트도 같이 넘기도록함 (갱신)
+    point = serializers.IntegerField(source='user.point', read_only=True)
+    
     class Meta:
         model = Review
         # fields = ('id', 'title', 'movie_title', 'content', 'rank',)

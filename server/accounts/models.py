@@ -6,4 +6,5 @@ from django.contrib.auth.models import AbstractUser
 # (추후에 유저 모델을 커스텀 할 필요가 있을 것 같으면 반드시 프로젝트 초기에 미리 설정할 것을 권장)
 class User(AbstractUser):
     followers = models.ManyToManyField('self', symmetrical=False, related_name='followings')
+    point = models.PositiveIntegerField(default=0)
 

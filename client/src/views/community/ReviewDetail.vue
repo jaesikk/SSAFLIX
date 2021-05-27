@@ -130,7 +130,7 @@ export default {
     },
     // accounts.userId와 review.user 같을때만 수정, 삭제기능을 활성화
     checkId: function () {
-      if (this.$store.state.accounts.userId === this.review.user) {
+      if (this.accounts.userId === this.review.user) {
         this.checkReviewId = true
       }
       else {
@@ -140,7 +140,7 @@ export default {
     checkComment: function (comment, idx) {
       console.log(this.comments[idx].user)
       console.log(comment.user)
-      if (this.$store.state.accounts.userId === comment.user) {
+      if (this.accounts.userId === comment.user) {
         this.checkCommentUser = true
         console.log('true')
       }
