@@ -3,21 +3,22 @@
     <div class="carousel-item" :class="{'active': index === 0}">
       <!-- Button trigger modal -->
       <!-- :alt="videoData.snippet.title" -->
-      <button type="button" class="border-0 p-0" data-bs-toggle="modal" data-bs-target="#videoModal">
+      <button type="button" class="border-0 p-0" data-bs-toggle="modal" :data-bs-target="'#videoModal'+this.index">
         <img class="d-block w-100" :src="thumbnail" alt="videoTitle">
       </button>
       <!-- Modal -->
-      <div class="modal fade" id="videoModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" :id="'videoModal'+this.index" data-bs-backdrop="static" tabindex="-1" :aria-labelled-by="'videoModalLabel'+this.index" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">{{ videoData[0].snippet.title }}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+              <h5 class="modal-title" :id="'videoModalLabel'+this.index">{{ videoData[0].snippet.title }}</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" @click="stopVideo"  aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="video-container">
+                  <!-- id="ytplayer-'+this.index"  -->
                 <iframe 
-                  id="ytplayer" 
+                  :id="'ytplayer-'+this.index" 
                   type="text/html"
                   :src="videoURI"
                   frameborder="0">
@@ -85,8 +86,8 @@ export default {
   },
   methods: {
     stopVideo: function () {
-      // const st = document.getElementById('ytplayer-'+this.index)
-      // st.setAttribute('src', this.videoURI)
+      const st = document.getElementById('ytplayer-'+this.index)
+      st.setAttribute('src', this.videoURI)
     }
   }
 }

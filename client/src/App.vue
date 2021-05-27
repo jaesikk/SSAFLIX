@@ -62,7 +62,7 @@ export default {
     onLogout: function () {
       localStorage.removeItem('jwt')
       // this.isLogin = false
-      this.$store.dispatch('logoutUser')
+      this.$store.dispatch('userStore/logoutUser')
       axios.defaults.headers.common['Authorization'] = ''
       console.log(axios.defaults.headers.common['Authorization'])
       this.$router.push({ name: 'Login' })
@@ -76,7 +76,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['isLogin'])
+    ...mapState('userStore', ['isLogin'])
   }
 }
 </script>

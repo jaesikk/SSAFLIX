@@ -1,6 +1,6 @@
 <template>
   <div id="MovieDetail">
-    {{movie}}
+    <h1>{{ movie.title }}</h1>
 
     <h2>동영상</h2>
     <div v-show="isFoundVideo" id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">

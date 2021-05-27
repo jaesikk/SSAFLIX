@@ -107,3 +107,5 @@ def user_detail(request, user_pk):
     serializer = UserSerializer(user)
     print(serializer)
     return Response(serializer.data)
+
+
