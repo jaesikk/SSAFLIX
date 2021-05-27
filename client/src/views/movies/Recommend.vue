@@ -6,7 +6,7 @@
     <p>오늘의 추천 영화는 ??</p>
     <br>
     <div v-show="isRandomClick">
-      <img :src="poster" alt="movie_poster">
+      <img class="rounded" :src="poster" alt="movie_poster">
       <p>{{ movie.title }} !</p>
     </div>
   </div>

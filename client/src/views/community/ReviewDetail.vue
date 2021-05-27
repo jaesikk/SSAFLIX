@@ -34,6 +34,7 @@
       <br>
       <ul>
         <li v-for="(comment) in comments" :key="comment.id" class="row">
+          {{ comment }}
           <span class="col text-muted" >익명{{ comment.user }} |</span>
           <span class="col">{{ comment.content }}</span>
           <span class="col text-muted ">

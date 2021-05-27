@@ -10,13 +10,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <router-link to="/" class="nav-link">Home</router-link>
+                <router-link to="/" class="nav-link text-decoration-none">Home</router-link>
               </li>
               <li class="nav-item">
-                <router-link :to="{ name: 'Recommend' }" class="nav-link">Recommend</router-link>
+                <router-link :to="{ name: 'Recommend' }" class="nav-link text-decoration-none">Recommend</router-link>
               </li>
               <li class="nav-item">
-                <router-link :to="{ name: 'Community' }" class="nav-link">Community</router-link>
+                <router-link :to="{ name: 'Community' }" class="nav-link text-decoration-none">Community</router-link>
               </li>
             </ul>
 
@@ -25,12 +25,12 @@
                 {{isDark ? 'White Mode' : 'Dark Mode'}}  
               </button>
               <!-- <p>{{ Number(accounts.userId) }}</p> -->
-              <span v-if="isLogin">
-                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3">My Profile</router-link>
-                <router-link to="#" @click.native="onLogout" class="nav-link">Logout</router-link>
+              <span id="nav-login" v-if="isLogin">
+                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3 text-decoration-none">My Profile</router-link>
+                <router-link to="#" @click.native="onLogout" class="nav-link text-decoration-none">Logout</router-link>
               </span>
               <span v-else>
-                <router-link :to="{ name: 'Login' }" class="nav-link">Login</router-link> 
+                <router-link :to="{ name: 'Login' }" class="nav-link text-decoration-none">Login</router-link> 
                 <!-- <router-link :to="{ name: 'Signup' }" class="nav-link">Signup</router-link> -->
               </span>
             </div>
@@ -143,7 +143,9 @@ export default {
   /* color: beige; */
 }
 
-
+#nav-login {
+  display: flex;
+}
 /* #nav a.fontDark {
   color: #16181a;
 }
