@@ -12,7 +12,7 @@
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" :id="'videoModalLabel'+this.index">{{ videoData[0].snippet.title }}</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal"  aria-label="Close"></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" @click="stopVideo"  aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="video-container">

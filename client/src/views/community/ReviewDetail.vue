@@ -70,7 +70,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['accounts'])
+    ...mapState('userStore', ['accounts'])
   },
   methods: {
     delReview: function (review) {

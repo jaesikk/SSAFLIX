@@ -58,8 +58,10 @@ const store = new Vuex.Store({
     movieStore: movieStore,
     userStore: userStore,
   },
-  plugins: [  
-    createPersistedState()
+  plugins: [
+    createPersistedState({
+      paths: ["userStore"]
+    })
   ],
 })
 export default store

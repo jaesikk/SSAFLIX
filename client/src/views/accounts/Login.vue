@@ -67,7 +67,7 @@ export default {
     //   })
     // }
     login: function () {
-      this.$store.dispatch('loginUser', this.credentials)
+      this.$store.dispatch('userStore/loginUser', this.credentials)
       // axios.defaults.headers.common['Authorization'] = `JWT ${this.$store.state.token}`
       this.$emit('login')
       this.$router.push({ name: 'Home' }) 

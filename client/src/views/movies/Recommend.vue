@@ -28,7 +28,7 @@ export default {
   },
   methods: {
     randomRecommend: function () {
-      const rndIdx = _.random(1, this.movies.length)
+      const rndIdx = _.random(1, this.popularMovies.length)
       axios({
         method: 'GET',
         url: SERVER_URL + `/movies/${rndIdx}/`

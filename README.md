@@ -105,4 +105,50 @@ with open('movies.json', 'w', encoding='utf-8') as f:
 ## 210523
 
 - 코드 주석 추가 100%는 아님
+- 좋아요 기능 만들기 시작
+- 리뷰 데이터 이슈 해결
+
+
+
 - 
+- 
+
+
+
+
+
+## 210524
+
+- 세세한 오타 수정
+- 좋아요 기능 완성
+
+
+
+- vuex-persistedstate를 통해 외부 관리 시작 (vuex에 유저 정보 유지하도록)
+- axios.defaults.headers.common['Authorization'] vuex로 관리 시에 등록이 안되는 문제 발생
+  - vuex의 actions에서 context로 데이터를 접근해서 바꿈
+  - console.log로 출력시 안되는 이유 - vuex에서 값을 넣는 시간보다 출력시간이 더빠름 
+- ReviewDetail에 수정, 삭제 기능 추가
+- 팔로워 기능 개발 시작 - 모델, 시리얼라이저, 뷰 작성
+
+
+
+
+
+## 210525
+
+- 코드에 주석 추가
+- 랜덤 추천 페이지 작성
+- 영화 상세 페이지 뷰 작성 (django)
+- 프로필 페이지 수정 (기본 제공 틀에서)
+- 유저 디테일 뷰 작성
+- 팔로우 정보를 담아주는 팔로우 데이터을 유저 시리얼라이저에 추가, 프로필과 연결
+- movie 모델 - tmdb_id 추가, video 모델 작성, 새롭게 데이터 뽑도록 수정 (get_movies.py) 
+  - 인기영화, 평점 높은 영화, 개봉예정 영화 3개 파트 + 영화에 들어간 영상 정보를 video 모델에 작성
+  - 문제점 - video에 movie.tmdb_id를 외래키로 삼으려고 했는데 loaddata할 때 고유키 문제와 video에 연결이 안되는 문제 -> 그냥 별도의 video 모델로 두고 사용
+
+
+
+## 210526
+
+- movie
