@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input id="comment-input" type="text" v-model="comment" placeholder="댓글을 입력하세요." @keyup.enter="createComment">
+    <input id="comment-input" type="text" v-model="comment" placeholder="댓글을 입력하세요." @keyup.enter="createComment"> <button @click="createComment">댓글</button>
   </div>
 </template>
 

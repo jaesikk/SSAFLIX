@@ -88,7 +88,7 @@ img요소를 넣고 그 요소를 스타일링하는것이 더 간편*/
 #img {
   height: 100%;
   width: 100%;
-  opacity: 0.5;
+  opacity: 0.3;
   position: fixed;
   top: 0px;
   bottom: 0px;

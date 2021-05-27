@@ -1,5 +1,7 @@
 <template>
   <div id="reviewlist" class="container fs-3">
+    <!-- <img id="img" src="https://p4.wallpaperbetter.com/wallpaper/379/361/318/movie-the-intern-anne-hathaway-wallpaper-preview.jpg" alt=""> -->
+
     <h1>Community</h1>
     <router-link :to="{ name: 'CreateReview' }" class="navbar-brand d-flex justify-content-end ml-3">게시글 생성</router-link>
     <ol>
