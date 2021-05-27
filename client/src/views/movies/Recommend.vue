@@ -1,8 +1,10 @@
 <template>
   <div>
     <h1>추천 영화 페이지</h1>
-    <button @click="randomRecommend">오늘의 랜덤 영화 추천</button>
+    <br>
+      <button @click="randomRecommend" class="btn btn-outline-primary" >오늘의 랜덤 영화 추천</button>
     <p>오늘의 추천 영화는 ??</p>
+    <br>
     <div v-show="isRandomClick">
       <img :src="poster" alt="movie_poster">
       <p>{{ movie.title }} !</p>
@@ -44,7 +46,7 @@ export default {
   },
   computed: {
     ...mapState('movieStore', ['popularMovies'])
-  }
+  },
 }
 </script>
 

@@ -1,7 +1,12 @@
 <template>
 <div>
-  <h1>상영</h1>
+  <!-- <button @click="homeBg">homeBg</button> -->
+  <div id="homebg-box">
+    <img id="homebg-poster" class="img-fluid" :src="this.backdropPath" alt="poster">
+  </div>
   <!-- <button @click="onDark">다크모드</button> -->
+
+  <h1>오늘 한국의 가장 인기있는 콘텐츠</h1>
   <div class="home slider">
     <div class="container">
     <!-- popularMovies -->
@@ -31,7 +36,7 @@
     </span>
     </div>
 
-    <h2>명작</h2>
+    <h1>기성세대가 뽑은 명작 콘텐츠</h1>
     <!-- topRatedMovies -->
     <span id="sample" onmouseover="scrollEsquerda2()" onmouseout="clearScroll2()" class="handle handlePrev active">
       <i class="fa fa-caret-left" aria-hidden="true"></i>
@@ -56,7 +61,7 @@
       <i class="fa fa-caret-right" aria-hidden="true"></i>
     </span>
 
-    <h2>다가오는 영화</h2>
+    <h1>개봉이 기대되는 콘텐츠</h1>
     <span id="upcoming" onmouseover="scrollEsquerda3()" onmouseout="clearScroll3()" class="handle handlePrev active">
       <i class="fa fa-caret-left" aria-hidden="true"></i>
     </span>
@@ -120,6 +125,10 @@
 // import axios from 'axios'
 import MovieCard from '@/components/MovieCard.vue'
 import { mapState } from 'vuex'
+import _ from 'lodash'
+import axios from 'axios'
+const TMDB_API_KEY = process.env.VUE_APP_TMDB_API_KEY
+
 
 // const SERVER_URL = process.env.VUE_APP_SERVER_URL
 // const movieStore = 'movieStore'
@@ -133,6 +142,8 @@ export default {
     return {
       selectMovie: '',
       checkDark: true,
+      backdropPath: '',
+      images: [],
       // videoList: [],
       // videoURI: '',
     }
@@ -161,11 +172,40 @@ export default {
     //     // body off or body2
     //   }
     // },
+    homeBg: function () {
+      // console.log(this.topRatedMovies, 'here')
+      const randomBg = _.random(1, this.topRatedMovies.length-1)
+      // console.log(randomBg)
+      // console.log(this.topRatedMovies[randomBg])
+      axios({
+        method: 'GET',
+        url: `https://api.themoviedb.org/3/movie/${this.topRatedMovies[randomBg].tmdb_id}/images`,
+        params: {
+          api_key: TMDB_API_KEY,
+          language: "ko-KR",
+          include_image_language: "ko,en",
+        }
+      }).then((res) => {
+        // console.log(res)
+        this.images = res.data
+        if (this.images.backdrops.length) {
+          this.backdropPath = "https://image.tmdb.org/t/p/original/" + String(this.images.backdrops[0].file_path)
+        }
+        else {
+          this.backdropPath = "https://image.tmdb.org/t/p/original/" + String(this.images.posters[0].file_path)
+        }
+        // console.log(this.topRatedMovies[randomBg])
+        // console.log(this.backdropPath)
+      }).catch((err) =>{
+        console.log(err.response)
+      })
+    },
   },
   mounted: function () {
     this.$store.dispatch('movieStore/getMovies', 'popular')
     this.$store.dispatch('movieStore/getMovies', 'topRated')
     this.$store.dispatch('movieStore/getMovies', 'upcoming')
+    this.homeBg()
     // this.$nextTick(function () upcoming{
     // })
   },
@@ -178,12 +218,34 @@ export default {
 </script>
 
 <style>
+#homebg-box {
+  height: 600px;
+  position: relative;
+}
+#homebg-poster {
+  top: -12%;
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  overflow: hidden;
+  opacity: 0.8;
+  z-index: -1;
+}
+#popular{
+  position: absolute;
+}
+
 #sample {
   position: absolute;
   top: 350%;
 }
 #upcoming {
-  position: absolute;
+  /* position: absolute; */
   top: 700%;
+}
+
+.btn-dark {
+  background-color: #16181a;
+  border-color: #16181a;
 }
 </style>

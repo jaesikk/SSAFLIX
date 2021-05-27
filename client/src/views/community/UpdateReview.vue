@@ -14,13 +14,13 @@
           </div>
           <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">글 내용</span>
-            <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="height: 180px" v-model.trim="review.content"></textarea>
+            <textarea class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" style="height: 360px" v-model.trim="review.content"></textarea>
           </div>
           <div class="input-group input-group-sm mb-3">
             <span class="input-group-text" id="inputGroup-sizing-sm">평점</span>
             <input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model.trim="review.rank">
           </div>
-          <button @click="updateReview">생성</button>
+          <button class="btn btn-outline-primary" @click="updateReview">생성</button>
         </div>
     </div>
 </template>

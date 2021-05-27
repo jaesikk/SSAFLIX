@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="wrapper">
     <div id="nav">
       <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-2">
         <div class="container-fluid">
@@ -35,7 +35,14 @@
     </div>
     <router-view @login="onLogin" :isLogin="isLogin"/>
     <!-- 로그인  -->
-    
+    <!-- <footer id="footer" class="footer mt-auto py-3 sticky-bottom m-3">
+      <div class="container text-muted fs-6">
+        <ul href="">투자 정보  |  회사 정보</ul>
+        <ul href="">문의 하기   |  이용 약관</ul>
+        <span> 고객센터 : 042-820-7399  |</span>
+        <span> 주소 : 대한민국 대전광역시 삼성화재연수원 SSAFY 대전캠퍼스</span>
+      </div>
+    </footer> -->
   </div>
 </template>
 
@@ -93,7 +100,7 @@ export default {
 }
 
 #nav {
-  padding: 0px 50px;
+  margin: 0px 50px;
   margin-bottom: 70px;
 }
 
@@ -105,4 +112,19 @@ export default {
 #nav a.router-link-exact-active {
   color: #bd2626;
 }
+
+#footer {
+  position: absolute;
+  left: 32%;
+  bottom: 0;
+}
+
+.wrapper {
+  height: 100%;
+}
+
+.container-fluid {
+  margin: 0px 60px;
+}
 </style>
+

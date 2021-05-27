@@ -1,6 +1,7 @@
 <template>
-  <div>
-    <input id="comment-input" type="text" v-model="comment" placeholder="댓글을 입력하세요." @keyup.enter="createComment"> <button @click="createComment">댓글</button>
+  <div id="comment-input">
+    <input class="form-control" type="text" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" v-model="comment" placeholder="댓글을 입력하세요." @keyup.enter="createComment">
+    <button @click="createComment" class="btn btn-sm btn-outline-light" style="width:50px">댓글</button>
   </div>
 </template>
 
@@ -41,7 +42,9 @@ export default {
 
 <style>
 #comment-input {
+  display: flex;
   width: 40%;
+  margin-left: 30%;
 }
 
 </style>
