@@ -30,7 +30,7 @@
       <br>
       <ul>
         <li v-for="(comment, idx) in comments" :key="comment.id" class="row">
-          <span class="col text-muted" >익명{{ comment.user }} |</span>
+          <span class="col text-muted" >{{ comment.username }} |</span>
           <span class="col">{{ comment.content }}</span>
           <span class="col text-muted ">
             | {{ comment.created_at }} 
