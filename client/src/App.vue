@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark p-2">
+      <nav class="navbar fixed-top navbar-expand-lg navbar-dark p-2">
         <div class="container-fluid">
           <router-link to="/" class="navbar-brand"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="NETFLIX" style= "width:120px"></router-link>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -82,18 +82,19 @@ export default {
 </script>
 
 <style>
+
+
 #app {
   /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   font-family: 'Noto Sans KR', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #ffffffea;
 }
 
 #nav {
   padding: 0px 50px;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
 }
 
 #nav a {

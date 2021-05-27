@@ -7,9 +7,9 @@ body,
 }
 
 h1,
-p {
+/* p {
   text-align: center;
-}
+} */
 p {
   width: 100%;
   max-width: 500px;
@@ -62,7 +62,7 @@ a:hover {
 }
 
 .slider .handle {
-    background: rgba(20, 20, 20, 0.26);
+    background: rgba(8, 8, 8, 0.);
     position: absolute;
     top: 0;
     height: 550px;
