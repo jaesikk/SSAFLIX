@@ -97,16 +97,12 @@ def follow(request, user_pk):
 @permission_classes([IsAuthenticated])
 def user_detail(request, user_pk):
     user = get_object_or_404(get_user_model(), pk=user_pk)
-    followData = {
-        # 'follow' : follow,
-        'fiCnt' : user.followers.count(),
-        'fwCnt' : user.followings.count(),
-    }
     # print(UserSerializer)
     # serializer = UserSerializer(user, followData=followData)
     # 상세 정보는 UserDetail로 변경
     serializer = UserDetailSerializer(user)
-    print(serializer)
+    # print(serializer.data)
+
     return Response(serializer.data)
 
 

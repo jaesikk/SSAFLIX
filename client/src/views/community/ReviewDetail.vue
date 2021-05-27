@@ -154,18 +154,17 @@ export default {
   mounted: function () {
     this.getComments()
     this.checkId()
-    // axios ({
-    //     method: 'GET',
-    //     url: SERVER_URL + `/community/${this.review.id}/`,
-    //     data: this.review,
-    //   }).then((res) => {
-    //     console.log(res.data)
-    //     this.isLike = res.data.isLike
-    //     // this.getReviews()
-    //   }).catch((err) => {
-    //     console.log(err.response)
-    //     alert(err.response.data.error)
-    //   })
+    axios ({
+        method: 'GET',
+        url: SERVER_URL + `/community/${this.review.id}/like/`,
+      }).then((res) => {
+        console.log(res.data)
+        this.isLike = res.data.isLike
+        // this.getReviews()
+      }).catch((err) => {
+        console.log(err.response)
+        alert(err.response.data.error)
+      })
   }
 }
 </script>

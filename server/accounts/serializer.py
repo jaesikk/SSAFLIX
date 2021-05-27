@@ -1,6 +1,7 @@
+from community.sertializer import ReviewSerializer
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-
+from community.models import Review
 
 # 현재 어떤 유저 모델인지 개발마다 다르기 때문에 get_user_model이라는 함수로 명확히 가져올 수 있도록함
 User = get_user_model()
@@ -25,6 +26,13 @@ class UserDetailSerializer(serializers.ModelSerializer):
     def get_followData(self, obj):
         return { 'followerCnt': obj.followers.count(), 'followingCnt': obj.followings.count(), }
 
+    # review_like_Data = serializers.SerializerMethodField()
+    # def get_review_like_Data(self, obj):
+    #     return { 'reviewData': Review.objects.value_lists(pk=obj.pk), 'likeData': obj.like_reviews.value_lists(), }
+    # 내가 쓴 글 리스트 - reviews
+    reviews = ReviewSerializer(read_only=True, many=True)
+    # 내가 좋아요 한 글 리스트 - like_reviews
+    like_reviews = ReviewSerializer(read_only=True, many=True)
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'followData', 'point')
+        fields = ('id', 'username', 'password', 'followData', 'point', 'reviews', 'like_reviews', )

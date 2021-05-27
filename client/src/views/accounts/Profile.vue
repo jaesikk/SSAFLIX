@@ -36,7 +36,7 @@ export default {
     onFollow: function() {
       axios ({
         method: 'POST',
-        url: SERVER_URL + `/accounts/${this.review.user}/follow/`,
+        url: SERVER_URL + `/accounts/${this.reviewUser}/follow/`,
       }).then((res) => {
         console.log(res.data)
         this.isFollow = res.data.isFollow
@@ -50,9 +50,9 @@ export default {
     getUser: function() {
       axios ({
         method: 'GET',
-        url: SERVER_URL + `/accounts/${this.review.user}/`,
+        url: SERVER_URL + `/accounts/${this.reviewUser}/`,
       }).then((res) => {
-        console.log(res.data)
+        console.log(res)
         this.user = res.data
       }).catch((err) => {
         console.log(err.response)

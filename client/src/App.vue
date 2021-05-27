@@ -21,7 +21,12 @@
             </ul>
 
             <div class="d-flex">
+              <button @click="changeDarkMode" :style="{ color: isDark? '#f1f2f3d2' : '#16181a'}" class="btn btn-toggle" data-toggle="button" aria-pressed="false" autocomplete="off">
+                {{isDark ? 'White Mode' : 'Dark Mode'}}  
+              </button>
+              <!-- <p>{{ Number(accounts.userId) }}</p> -->
               <span v-if="isLogin">
+                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3">My Profile</router-link>
                 <router-link to="#" @click.native="onLogout" class="nav-link">Logout</router-link>
               </span>
               <span v-else>
@@ -50,6 +55,7 @@ export default {
   data: function () {
     return {
       // isLogin: false,
+      isDark: true,
     }
   },
   methods: {
@@ -67,6 +73,29 @@ export default {
       console.log(axios.defaults.headers.common['Authorization'])
       this.$router.push({ name: 'Login' })
     },
+    changeDarkMode: function () {
+      if (this.isDark === true){
+        document.body.style.background = 'whitesmoke'
+        document.body.style.color = '#16181a'
+        // document.querySelectorAll('#nav a').forEach(a => {
+        //   // a.style.color = '#16181a'
+        //   a.classList.add('fontDark')
+        //   a.classList.remove('fontWhite')
+        // })
+        // document.querySelector('.router-link-exact-active').color = '#bd2626'
+      } else {
+        document.body.style.background = '#16181a'
+        document.body.style.color = '#f1f2f3d2'
+        // document.querySelectorAll('#nav a').forEach(a => {
+        //   // a.style.color = '#f1f2f3d2'
+        //   a.classList.remove('fontDark')
+        //   a.classList.add('fontWhite')
+        // })
+        // document.querySelector('.router-link-exact-active').color = '#bd2626'
+        // console.log(document.querySelectorAll('#nav a'))
+      }
+      this.isDark = !this.isDark
+    },
   },
   // 토큰을 가져오고, 있다면 onLogin 실행한다
   created: function () {
@@ -76,12 +105,13 @@ export default {
     }
   },
   computed: {
-    ...mapState('userStore', ['isLogin'])
+    ...mapState('userStore', ['isLogin', 'accounts'])
   }
 }
 </script>
 
 <style>
+
 
 
 #app {
@@ -97,12 +127,38 @@ export default {
   margin-bottom: 70px;
 }
 
+
+
 #nav a {
   font-weight: bold;
+  color: inherit;
+  /* color: #f1f2f3d2; */
+  /* color: beige; */
+}
+
+
+/* #nav a.fontDark {
+  color: #16181a;
+}
+
+#nav a.fontWhite {
+  color: #f1f2f3d2;
+} */
+
+/* #nav a.navbar-dark .navbar-nav .nav-link {
+  color: #f1f2f3d2;
+} */
+
+/* #nav a.nav-link{
   color: #f1f2f3d2;
 }
+#nav a.btn-link{
+  color: #f1f2f3d2;
+} */
 
 #nav a.router-link-exact-active {
   color: #bd2626;
 }
+
+
 </style>
