@@ -4,31 +4,45 @@
     <!-- {{ reviews }} -->
     <h1>Community</h1>
     <router-link :to="{ name: 'CreateReview' }" class="navbar-brand d-flex justify-content-end p-5">게시글 생성</router-link>
-    <ol>
-      <li v-for="review in reviews" :key="review.id" :review="review">
-        <!-- {{ review }} -->
-        <div id="review-list" class="container">
-          <div class="row">
-            <div class="col">
-              {{ review.movie_title}}
-            </div>
-            <div class="col">
-              <router-link
-                :to="{ name: 'ReviewDetail',
-                    params: {reviewId: review.id, review: review}
-                  }"
-                class="navbar-brand">
-                {{ review.title }}
-              </router-link>
-            </div>
-            <div class="col">
-              <p class="text-muted fs-6">{{ review.created_at }}</p>
-            </div>
+      <div class="container">
+        <div class="row fs-5">
+          <div class="col">
+            <p>| 영화</p>
+          </div>
+          <div class="col">
+            <p>| 제목</p>
+          </div>
+          <div class="col">
+            <p>| 작성자</p>
           </div>
         </div>
-        <hr> 
-      </li>
-    </ol>
+      </div>
+    <br>
+      <ol>
+        <li v-for="review in reviews" :key="review.id" :review="review">
+          <!-- {{ review }} -->
+          <div id="review-list" class="container">
+            <div class="row">
+              <div class="col">
+                {{ review.movie_title}}
+              </div>
+              <div class="col">
+                <router-link
+                  :to="{ name: 'ReviewDetail',
+                      params: {reviewId: review.id, review: review}
+                    }"
+                  class="navbar-brand fs-2">
+                  {{ review.title }}
+                </router-link>
+              </div>
+              <div class="col">
+                <p class="text-muted fs-4">{{ review.username }}</p>
+              </div>
+            </div>
+          </div>
+          <hr> 
+        </li>
+      </ol>
     <!-- <CommunityDetail v-for="review in reviews" :key="review.id" :review="review" /> -->
     <!-- <button @click="getReviews" > 정보 가져오기</button> -->
   </div>
