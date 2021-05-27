@@ -1,13 +1,56 @@
 <template>
   <div class="container">
     <h1>{{ user.username }}'s Profile</h1>
+    <br>
     <!-- {{ review }} -->
     <div class="d-flex justify-content-between">
       <button class="btn btn-danger" @click="onFollow"><i class= "fa-heart" :class="[ isFollow ? 'fas': 'far']"></i></button>
       <span>팔로우: {{ user.followData.followingCnt }} | 팔로워: {{ user.followData.followerCnt }} | 포인트: {{ user.point }}</span>
     </div>
     <hr>
-    <!-- <button @click="getUser">정보가져오기</button> -->
+      <h3>작성한 리뷰 목록</h3>
+    <br>
+    <ul>
+    <div class="m-2 fs-4 d-flex justify-content-between">
+      <div class="col"><p>영화제목</p></div>
+      <div class="col"><p>리뷰제목</p></div>
+    </div>
+      <li v-for="review in user.reviews" :key="review.id" class="m-2 d-flex justify-content-between">
+        <div class="col">
+          <p>
+            {{ review.movie_title}}
+          </p>
+        </div>
+        <div class="col">
+          <p>
+            {{review.title}}
+          </p>
+        </div>
+      <hr>
+      </li>   
+    </ul>
+    <hr>
+    <h3>좋아요한 리뷰 목록</h3>
+    <br>
+    <ul>
+      <div class="m-2 fs-4 d-flex justify-content-between">
+        <div div class="col"><p>영화제목</p></div>
+        <div class="col"><p>리뷰제목</p></div>
+      </div>
+      <li v-for="review in user.like_reviews" :key="review.id" class="m-2 d-flex justify-content-between">
+          <div class="col">
+            <p>
+              {{ review.movie_title}}
+            </p>
+          </div>
+          <div class="col">
+            <p>
+              {{review.title}}
+            </p>
+          </div>
+          <hr>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -68,5 +111,10 @@ export default {
 </script>
 
 <style>
+/* ul {
+  list-style: none;
+} */
+
+
 
 </style>
