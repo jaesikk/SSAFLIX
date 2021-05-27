@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
-
+// async function return promise
 const movieStore = {
   namespaced: true,
   state: {
@@ -23,9 +23,9 @@ const movieStore = {
     },
   },
   actions: {
-    getMovies: function (context, queryString) {
+    getMovies(context, queryString) {
       const str = queryString
-      axios({
+      return axios({
         method: 'POST',
         url: SERVER_URL + '/movies/',
         data: {

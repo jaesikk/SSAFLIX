@@ -62,7 +62,18 @@ export default {
   },
   mounted: function () {
     this.getUser()
-    console.log(this.getUser)
+    axios ({
+        method: 'GET',
+        url: SERVER_URL + `/accounts/${this.reviewUser}/follow/`,
+      }).then((res) => {
+        // console.log(res.data)
+        this.isFollow = res.data.isFollow
+        // 팔로우 데이터를 보내고 getUser를 통해 갱신시켜 팔로우, 팔로워 수를 갱신
+        this.getUser()
+      }).catch((err) => {
+        // console.log(err.response)
+        alert(err.response.data.error)
+      })
   },
 }
 </script>

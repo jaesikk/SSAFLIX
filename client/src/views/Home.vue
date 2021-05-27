@@ -203,9 +203,11 @@ export default {
   },
   mounted: function () {
     this.$store.dispatch('movieStore/getMovies', 'popular')
-    this.$store.dispatch('movieStore/getMovies', 'topRated')
+    this.$store.dispatch('movieStore/getMovies', 'topRated').then(() => {
+      // console.log(this.topRatedMovies)
+      this.homeBg()
+    })
     this.$store.dispatch('movieStore/getMovies', 'upcoming')
-    this.homeBg()
     // this.$nextTick(function () upcoming{
     // })
   },

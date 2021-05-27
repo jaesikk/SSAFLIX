@@ -37,7 +37,7 @@ export default {
       }).then((res) => {
         console.log(res)
         this.movie = res.data
-        this.poster = "https://image.tmdb.org/t/p/w400/" + String(this.movie.poster_path)
+        this.poster = "https://image.tmdb.org/t/p/w500/" + String(this.movie.poster_path)
         this.isRandomClick = true
       }).catch((err) =>{
         console.log(err.response)

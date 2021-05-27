@@ -26,7 +26,7 @@
               </button>
               <!-- <p>{{ Number(accounts.userId) }}</p> -->
               <span v-if="isLogin">
-                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3">My Profile</router-link>
+                <router-link :to="{ name: 'Profile', params: {reviewUser: Number(accounts.userId), review: accounts}}" class="btn btn-link ml-3">{{ accounts.username }}</router-link>
                 <router-link to="#" @click.native="onLogout" class="nav-link">Logout</router-link>
               </span>
               <span v-else>
