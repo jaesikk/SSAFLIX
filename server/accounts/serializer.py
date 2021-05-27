@@ -7,7 +7,16 @@ User = get_user_model()
 
 # 커스텀 유저 모델을 기반으로 직렬화 모델을 만드는데, 
 # password는 보여줘선 안되는 부분이므로 사용만 가능하게끔 (read는 불가)
+# 로그인 용
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+    
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'password',)
+
+# 로그인 외에도 팔로우 수나 포인트 등 다양한 기능
+class UserDetailSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
     
     # 팔로우 데이터를 얻기위해 커스텀 시리얼라이저 메소드로 가져오기
@@ -18,4 +27,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'password', 'followData',)
+        fields = ('id', 'username', 'password', 'followData', 'point')

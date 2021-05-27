@@ -22,6 +22,7 @@ def movies(request):
     # 특정 영화 리스트를 가져온다.
     if request.data['query'] == 'popular':
         movie_list = get_list_or_404(Movie.objects.order_by('-popularity'))[:30]
+        # movie_list = Movie.objects.values_list('popularity', flat=True).order_by('-popularity').distinct()[:30]
     elif request.data['query'] == 'topRated':
         movie_list = get_list_or_404(Movie.objects.order_by('-vote_average'))[:15]
     elif request.data['query'] == 'upcoming':

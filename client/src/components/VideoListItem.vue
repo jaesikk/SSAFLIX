@@ -14,7 +14,7 @@
               <h5 class="modal-title" :id="'videoModalLabel'+this.index">{{ videoData[0].snippet.title }}</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" @click="stopVideo"  aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-2">
               <div class="video-container">
                   <!-- id="ytplayer-'+this.index"  -->
                 <iframe 
@@ -108,5 +108,14 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.modal-header {
+  background-color: rgb(60, 60, 60);
+  /* color: black; */
+}
+
+.modal-body {
+  background-color: rgb(50, 50, 50);
 }
 </style>

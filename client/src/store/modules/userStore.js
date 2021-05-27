@@ -8,21 +8,23 @@ const userStore = {
     accounts: {
       userId: '',
       username: '',
+      point: 0,
     },
     token: '',
     isLogin: false,
   },
   mutations: {
-
     ADD_USER: function (state, data) {
       state.accounts.userId = data.user.id
       state.accounts.username = data.user.username
+      state.accounts.point = data.user.point
       state.isLogin = true
       state.token = data.token
     },
     DELETE_USER: function (state) {
       state.accounts.userId = ''
       state.accounts.username = ''
+      state.accounts.point = 0
       state.isLogin = false
       state.token = ''
     }

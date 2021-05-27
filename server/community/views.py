@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 
+from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework import status
@@ -28,7 +29,10 @@ def review_list_create(request):
         # print(request.data)
         # print(serializer.is_valid())
         if serializer.is_valid(raise_exception=True):
-            serializer.save(user=request.user)
+            user = get_object_or_404(get_user_model(), pk=request.user.pk)
+            user.point += 100
+            user.save()
+            serializer.save(user=user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET', 'PUT', 'DELETE'])
@@ -40,7 +44,7 @@ def review_list_create(request):
 # 단 수정, 삭제는 작성 유저와 동일일 때
 def review_update_delete(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
-    print(request.user)
+    # print(request.user)
     if request.method == 'GET':
         serializer = ReviewSerializer(review)
         return Response(serializer.data)
@@ -80,7 +84,10 @@ def review_comment_create(request, review_pk):
         if serializer.is_valid(raise_exception=True):
             # user, review는 외래키로 관리하고, request user부분과 review 부분에서 식별이 가능하므로 이렇게 적어야함.
             # 시리얼라이저는 두개를 읽는 용으로만 사용하므로 개발자가 직접 넣어줘야함.
-            serializer.save(review=review, user=request.user)
+            user = get_object_or_404(get_user_model(), pk=request.user.pk)
+            user.point += 10
+            user.save()
+            serializer.save(review=review, user=user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 @api_view(['GET', 'DELETE'])

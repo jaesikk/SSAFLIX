@@ -4,7 +4,7 @@
     <!-- {{ review }} -->
     <div class="d-flex justify-content-between">
       <button class="btn btn-danger" @click="onFollow"><i class= "fa-heart" :class="[ isFollow ? 'fas': 'far']"></i></button>
-      <span>팔로우: {{ user.followData.followingCnt }} | 팔로워: {{ user.followData.followerCnt }}</span>
+      <span>팔로우: {{ user.followData.followingCnt }} | 팔로워: {{ user.followData.followerCnt }} | 포인트: {{ user.point }}</span>
     </div>
     <hr>
     <!-- <button @click="getUser">정보가져오기</button> -->

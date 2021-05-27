@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .serializer import UserSerializer
+from .serializer import UserDetailSerializer, UserSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .models import User
@@ -102,9 +102,10 @@ def user_detail(request, user_pk):
         'fiCnt' : user.followers.count(),
         'fwCnt' : user.followings.count(),
     }
-    print(UserSerializer)
+    # print(UserSerializer)
     # serializer = UserSerializer(user, followData=followData)
-    serializer = UserSerializer(user)
+    # 상세 정보는 UserDetail로 변경
+    serializer = UserDetailSerializer(user)
     print(serializer)
     return Response(serializer.data)
 

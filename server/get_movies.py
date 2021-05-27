@@ -61,7 +61,7 @@ def get_movie_data(url_string, range_cnt, save_movieList_name, save_videoList_na
         # json.dump(movie_list, f, ensure_ascii=False)
 
 
-get_movie_data('popular', 4, 'popular_movies.json', 'popular_videos.json')
+get_movie_data('popular', 3, 'popular_movies.json', 'popular_videos.json')
 get_movie_data('top_rated', 2, 'top_rated_movies.json', 'top_rated_videos.json')
 get_movie_data('upcoming', 2, 'upcoming_movies.json', 'upcoming_videos.json')
 
