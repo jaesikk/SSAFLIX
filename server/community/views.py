@@ -21,6 +21,7 @@ def review_list_create(request):
         # 전체 리뷰 리스트 반환
         review_list = Review.objects.all()
         serializer = ReviewSerializer(review_list, many=True)
+        # print(serializer.data)
         return Response(serializer.data)
     else: # POST
         # 현재 들어온 요청 리뷰 데이터를 기반으로 유효성 검사 후 새롭게 생성

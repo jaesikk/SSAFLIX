@@ -23,6 +23,7 @@ class ReviewSerializer(serializers.ModelSerializer):
     reviewcomment_set = ReviewCommentSerializer(read_only=True, many=True)
     # 댓글 포인트도 같이 넘기도록함 (갱신)
     point = serializers.IntegerField(source='user.point', read_only=True)
+    username = serializers.CharField(source='user.username', read_only=True)
     
     class Meta:
         model = Review
